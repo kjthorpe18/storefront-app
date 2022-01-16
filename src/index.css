@@ -1,13 +1,70 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Raleway', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: whitesmoke;
+  min-width: 650px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#navbar {
+  font-size: 13pt;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+  overflow: hidden;
+  border-top: 1px solid rgb(54, 54, 54);
+  background-color: rgb(49, 49, 49);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
+}
+
+#navbar ul {
+  margin: 0;
+  padding: 0;
+}
+
+#navbar li {
+  float: left;
+  display: block;
+  padding: 14px 25px;
+  border-right: 1px solid  rgb(163, 163, 163);
+}
+
+#navbar a {
+  text-align: center;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+#navbar a:hover {
+  color: rgb(87, 87, 255);
+}
+
+#menu {
+  float: right;
+}
+
+#footer {
+  margin: 3%;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+#footer a {
+  text-decoration: none;
+  text-decoration-line: underline;
+  color: black;
+}
+
+#footer a:hover {
+  text-decoration: none;
+  text-decoration-line: underline;
+  color: rgb(87, 87, 255);
 }
