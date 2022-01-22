@@ -60,7 +60,7 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav id="navbar">
+      <nav id="navbar" className='sticky-top'>
         <Brand
           brandName="StoreFront"
           logo="logo-example.png"

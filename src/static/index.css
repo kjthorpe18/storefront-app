@@ -14,14 +14,35 @@ code {
     monospace;
 }
 
+
+html, body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.everything {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+
 #navbar {
   font-size: 13pt;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border-top: 1px solid rgb(54, 54, 54);
-  background-color: rgb(49, 49, 49);
+  background-color: rgb(110, 182, 250);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   max-height: 50px;
   height: 50px;
@@ -54,9 +75,14 @@ code {
 }
 
 #footer {
-  margin: 3%;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  font-size: 13pt;
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(110, 182, 250);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  max-height: 50px;
+  height: 50px;
 }
 
 #footer a {
@@ -64,6 +90,18 @@ code {
   text-decoration-line: underline;
   color: black;
 }
+
+.sticky-top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* .sticky-bottom{
+  position: fixed;
+  top: 0;
+  width: 100%;
+} */
 
 #brand {
   max-height: inherit;
@@ -81,5 +119,15 @@ code {
 }
 
 #menu-button {
-  height: inherit;
+  height: 85%;
+  color: black;
+  border: 1px solid black;
+  margin: 3px;
+}
+
+#menu-button:hover {
+  color: rgba(46, 46, 46, 0.815);
+  background-color: rgba(161, 161, 161, 0.815);
+  border: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

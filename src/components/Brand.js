@@ -5,7 +5,7 @@ class Brand extends Component {
     return (
       <img
         id="logo"
-        class="nav-item"
+        className="nav-item"
         alt="logo"
         src={require("../static/" + this.props.logo)}
       />
