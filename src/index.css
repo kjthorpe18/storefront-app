@@ -1,8 +1,8 @@
 body {
   margin: 0;
-  font-family: 'Raleway', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Raleway", "Roboto", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: whitesmoke;
@@ -10,19 +10,21 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 #navbar {
   font-size: 13pt;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
   border-top: 1px solid rgb(54, 54, 54);
   background-color: rgb(49, 49, 49);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  max-height: 50px;
+  height: 50px;
 }
 
 #navbar ul {
@@ -34,7 +36,7 @@ code {
   float: left;
   display: block;
   padding: 14px 25px;
-  border-right: 1px solid  rgb(163, 163, 163);
+  border-right: 1px solid rgb(163, 163, 163);
 }
 
 #navbar a {
@@ -47,8 +49,8 @@ code {
   color: rgb(87, 87, 255);
 }
 
-#menu {
-  float: right;
+.nav-item {
+  max-height: inherit;
 }
 
 #footer {
@@ -67,4 +69,23 @@ code {
   text-decoration: none;
   text-decoration-line: underline;
   color: rgb(87, 87, 255);
+}
+
+#brand {
+  max-height: inherit;
+  max-width: 20%;
+  margin: 0px;
+}
+
+#logo {
+  float: left;
+}
+
+#menu {
+  float: right;
+  height: inherit;
+}
+
+#menu-button {
+  height: inherit;
 }
