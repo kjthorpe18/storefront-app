@@ -10,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InfoIcon from "@mui/icons-material/Info";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
+import { Link } from 'react-router-dom';
 
 class Nav extends Component {
   constructor(props) {
@@ -38,6 +39,19 @@ class Nav extends Component {
     }
   }
 
+  linkFromPage(page) {
+    switch (page) {
+      case "Home":
+        return "/";
+      case "Categories":
+        return "/categories";
+      case "About Us":
+        return "/about";
+      default:
+        return "/";
+    }
+  }
+
   menuList() {
     return (
       <Box
@@ -48,7 +62,7 @@ class Nav extends Component {
       >
         <List>
           {["Home", "Categories", "About Us"].map((key, index) => (
-            <ListItem button key={key}>
+            <ListItem button key={key} component={Link} to={this.linkFromPage(key)}>
               <ListItemIcon>{this.iconRender(key)}</ListItemIcon>
               <ListItemText primary={key} />
             </ListItem>
