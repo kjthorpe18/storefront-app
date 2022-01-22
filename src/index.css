@@ -65,12 +65,6 @@ code {
   color: black;
 }
 
-#footer a:hover {
-  text-decoration: none;
-  text-decoration-line: underline;
-  color: rgb(87, 87, 255);
-}
-
 #brand {
   max-height: inherit;
   max-width: 20%;
