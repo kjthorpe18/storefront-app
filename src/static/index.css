@@ -14,8 +14,8 @@ code {
     monospace;
 }
 
-
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -32,11 +32,14 @@ html, body {
 .nav {
   position: sticky;
   top: 0;
-  z-index: 100;
+  flex-shrink: 0;
+  margin-bottom: 1em;
 }
 
 .content {
   flex: 1 0 auto;
+  flex-shrink: 0;
+  margin: 1em;
 }
 
 #navbar {
@@ -44,33 +47,10 @@ html, body {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: rgb(110, 182, 250);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   max-height: 50px;
   height: 50px;
-}
-
-#navbar ul {
-  margin: 0;
-  padding: 0;
-}
-
-#navbar li {
-  float: left;
-  display: block;
-  padding: 14px 25px;
-  border-right: 1px solid rgb(163, 163, 163);
-}
-
-#navbar a {
-  text-align: center;
-  text-decoration: none;
-  color: rgb(255, 255, 255);
-}
-
-#navbar a:hover {
-  color: rgb(87, 87, 255);
 }
 
 .nav-item {
@@ -81,7 +61,6 @@ html, body {
   font-size: 13pt;
   list-style-type: none;
   padding: 0;
-  overflow: hidden;
   background-color: rgb(110, 182, 250);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   max-height: 50px;
@@ -92,12 +71,6 @@ html, body {
   text-decoration: none;
   text-decoration-line: underline;
   color: black;
-}
-
-.sticky-top {
-  position: fixed;
-  top: 0;
-  width: 100%;
 }
 
 #brand {

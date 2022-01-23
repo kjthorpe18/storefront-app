@@ -10,7 +10,8 @@ import ListItemText from "@mui/material/ListItemText";
 import InfoIcon from "@mui/icons-material/Info";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
-import { Link } from 'react-router-dom';
+import AddIcon from "@mui/icons-material/Add";
+import { Link } from "react-router-dom";
 
 class Nav extends Component {
   constructor(props) {
@@ -34,6 +35,8 @@ class Nav extends Component {
         return <CategoryIcon />;
       case "About Us":
         return <InfoIcon />;
+      case "Create Product":
+        return <AddIcon />;
       default:
         return <InfoIcon />;
     }
@@ -47,6 +50,8 @@ class Nav extends Component {
         return "/categories";
       case "About Us":
         return "/about";
+      case "Create Product":
+        return "/create-product";
       default:
         return "/";
     }
@@ -61,12 +66,19 @@ class Nav extends Component {
         onKeyDown={() => this.toggleDrawer(false)}
       >
         <List>
-          {["Home", "Categories", "About Us"].map((key, index) => (
-            <ListItem button key={key} component={Link} to={this.linkFromPage(key)}>
-              <ListItemIcon>{this.iconRender(key)}</ListItemIcon>
-              <ListItemText primary={key} />
-            </ListItem>
-          ))}
+          {["Home", "Categories", "Create Product", "About Us"].map(
+            (key, index) => (
+              <ListItem
+                button
+                key={key}
+                component={Link}
+                to={this.linkFromPage(key)}
+              >
+                <ListItemIcon>{this.iconRender(key)}</ListItemIcon>
+                <ListItemText primary={key} />
+              </ListItem>
+            )
+          )}
         </List>
       </Box>
     );
@@ -74,7 +86,7 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav id="navbar" className='sticky-top'>
+      <nav id="navbar" className="sticky-top">
         <Brand
           brandName="StoreFront"
           logo="logo-example.png"
