@@ -25,13 +25,15 @@ const CreateProduct = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("https://gl6q2jonld.execute-api.us-east-2.amazonaws.com/products", {
-        name: formValues.name,
-        brand: formValues.brand,
-        price: formValues.price,
-        category: formValues.category,
-        productId: 4325326,
-      })
+      .post(
+        "https://fvvd85s1e4.execute-api.us-east-2.amazonaws.com/test/products",
+        {
+          name: formValues.name,
+          brand: formValues.brand,
+          price: formValues.price,
+          category: formValues.category
+        }
+      )
       .then(function (response) {
         console.log(response);
       })
