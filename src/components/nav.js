@@ -10,6 +10,8 @@ import ListItemText from "@mui/material/ListItemText";
 import InfoIcon from "@mui/icons-material/Info";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import LoginIcon from '@mui/icons-material/Login';
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 
@@ -31,12 +33,16 @@ class Nav extends Component {
     switch (type) {
       case "Home":
         return <HomeIcon />;
-      case "Categories":
-        return <CategoryIcon />;
+      case "Create Account":
+        return <PersonAddIcon />;
+      case "Log In":
+        return <LoginIcon />;
       case "About Us":
         return <InfoIcon />;
       case "Create Product":
         return <AddIcon />;
+      case "Categories":
+        return <CategoryIcon />;
       default:
         return <InfoIcon />;
     }
@@ -46,12 +52,16 @@ class Nav extends Component {
     switch (page) {
       case "Home":
         return "/";
-      case "Categories":
-        return "/categories";
+      case "Create Account":
+        return "/create-account";
+      case "Log In":
+        return "/login";
       case "About Us":
         return "/about";
       case "Create Product":
         return "/create-product";
+      case "Categories":
+        return "/categories";
       default:
         return "/";
     }
@@ -66,7 +76,7 @@ class Nav extends Component {
         onKeyDown={() => this.toggleDrawer(false)}
       >
         <List>
-          {["Home", "Categories", "Create Product", "About Us"].map(
+          {["Home", "Create Account", "Log In", "Categories", "Create Product", "About Us"].map(
             (key, index) => (
               <ListItem
                 button
