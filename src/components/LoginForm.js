@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@mui/material/Button";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import axios from "axios";
 
@@ -14,6 +15,7 @@ class LoginForm extends Component {
     this.state = {
       email: "",
       password: "",
+      loading: null,
       submitResult: null
     };
 
@@ -31,7 +33,10 @@ class LoginForm extends Component {
   };
 
   handleSubmit(event) {
+    // TODO: Check if inputs are empty, valid, etc.
     event.preventDefault();
+
+    this.setState({loading: "true"});
 
     axios
       .post(
@@ -44,17 +49,20 @@ class LoginForm extends Component {
       .then((response) => {
         console.log(response.status);
 
+        this.setState({loading: null});
         this.setState({submitResult: response.status});
       })
       .catch((error) => {
         console.log(error);
+
+        this.setState({loading: null});
         this.setState({submitResult: "Error"});
       });
   };
 
   renderResult() {
     if (this.state.submitResult != null) {
-      if (this.state.submitResult == 200) {
+      if (this.state.submitResult === 200) {
         return (
           <Alert severity="success">
             <AlertTitle>Success</AlertTitle>
@@ -75,7 +83,7 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div id="login-form">
+      <div className="form" id="login-form">
         <h2 className="form-header">Login</h2>
         <form onSubmit={this.handleSubmit}>
           <Grid
@@ -122,6 +130,9 @@ class LoginForm extends Component {
             </Grid>
           </Grid>
         </form>
+        <div>
+          {this.state.loading && <CircularProgress />}
+        </div>
         {this.renderResult()}
       </div>
     );

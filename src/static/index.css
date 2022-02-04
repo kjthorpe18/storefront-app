@@ -46,7 +46,7 @@ body {
   font-size: 13pt;
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 5px;
   background-color: rgb(110, 182, 250);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   max-height: 50px;
@@ -60,7 +60,7 @@ body {
 #footer {
   font-size: 13pt;
   list-style-type: none;
-  padding: 0;
+  padding: 5px;
   background-color: rgb(110, 182, 250);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   max-height: 50px;
@@ -73,11 +73,6 @@ body {
   color: black;
 }
 
-#brand {
-  max-height: inherit;
-  max-width: 20%;
-  margin: 0px;
-}
 
 #logo {
   float: left;
@@ -100,4 +95,12 @@ body {
   background-color: rgba(161, 161, 161, 0.815);
   border: 1px solid black;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.form-header {
+  margin: 5px;
+}
+
+.form {
+
 }

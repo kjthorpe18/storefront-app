@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Brand from "./Brand";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
@@ -97,11 +96,11 @@ class Nav extends Component {
   render() {
     return (
       <nav id="navbar" className="sticky-top">
-        <Brand
-          brandName="StoreFront"
-          logo="logo-example.png"
-          id="brand"
+        <img
+          id="logo"
           className="nav-item"
+          alt="logo"
+          src={require("../static/logo-example.png")}
         />
         <div id="menu" className="nav-item">
           <Button id="menu-button" onClick={() => this.toggleDrawer(true)}>
