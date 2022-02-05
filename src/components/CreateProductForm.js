@@ -7,6 +7,8 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import { notBlank } from "../helpers/Helpers";
+
 class CreateProductForm extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,7 @@ class CreateProductForm extends Component {
       category: "",
       loading: null,
       submitResult: null,
+      submitMessage: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -35,9 +38,24 @@ class CreateProductForm extends Component {
   }
 
   handleSubmit(event) {
-    // TODO: Check if inputs are empty, valid, etc.
     event.preventDefault();
 
+    // Check that no inputs are blank
+    let blank_input = false;
+
+    ["name", "brand", "price", "category"].forEach((item) => {
+      if (!notBlank(this.state[item])) {
+       blank_input = true;
+      }
+    });
+
+    if (blank_input) {
+      this.setState({ submitMessage: "Inputs cannot be blank." });
+      this.setState({ submitResult: 400 });
+      return;
+    }
+
+    // No blank inputs, make the request
     this.setState({ loading: "true" });
 
     axios
@@ -55,29 +73,31 @@ class CreateProductForm extends Component {
 
         this.setState({ loading: null });
         this.setState({ submitResult: response.status });
+        this.setState({ submitMessage: "Product creation successful!" });
       })
       .catch((error) => {
         console.log(error);
 
         this.setState({ loading: null });
         this.setState({ submitResult: "Error" });
+        this.setState({ submitMessage: "Product creation failed!" });
       });
   }
 
-  renderResult() {
+  renderResult(message) {
     if (this.state.submitResult != null) {
       if (this.state.submitResult === 201) {
         return (
           <Alert severity="success">
             <AlertTitle>Success</AlertTitle>
-            Product creation successful!
+            {message}
           </Alert>
         );
       } else {
         return (
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
-            Product creation failed!
+            {message}
           </Alert>
         );
       }
@@ -158,7 +178,7 @@ class CreateProductForm extends Component {
           </Grid>
         </form>
         <div>{this.state.loading && <CircularProgress />}</div>
-        {this.renderResult()}
+        {this.renderResult(this.state.submitMessage)}
       </div>
     );
   }

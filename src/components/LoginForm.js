@@ -8,6 +8,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import axios from "axios";
 
+import { notBlank, validEmail } from "../helpers/Helpers";
+
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -15,8 +17,10 @@ class LoginForm extends Component {
     this.state = {
       email: "",
       password: "",
+      invalidEmail: false,
       loading: null,
       submitResult: null,
+      submitMessage: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -30,11 +34,34 @@ class LoginForm extends Component {
     this.setState({
       [name]: value,
     });
+
+    // Validate the input email if that's what changed
+    if (name === "email") {
+      if (!validEmail(value)) {
+        this.setState({ invalidEmail: true });
+      } else {
+        this.setState({ invalidEmail: false });
+      }
+    }
   }
 
   handleSubmit(event) {
-    // TODO: Check if inputs are empty, valid, etc.
     event.preventDefault();
+
+    // Check that no inputs are blank
+    let blank_input = false;
+
+    ["email", "password"].forEach((item) => {
+      if (!notBlank(this.state[item])) {
+       blank_input = true;
+      }
+    });
+
+    if (blank_input) {
+      this.setState({ submitMessage: "Inputs cannot be blank." });
+      this.setState({ submitResult: 400 });
+      return;
+    }
 
     this.setState({ loading: "true" });
 
@@ -47,33 +74,35 @@ class LoginForm extends Component {
         }
       )
       .then((response) => {
-        console.log(response.status);
+        console.log(response);
 
         this.setState({ loading: null });
         this.setState({ submitResult: response.status });
+        this.setState({ submitMessage: "Log in successful!" });
       })
       .catch((error) => {
         console.log(error);
 
         this.setState({ loading: null });
         this.setState({ submitResult: "Error" });
+        this.setState({ submitMessage: "Log in failed!" });
       });
   }
 
-  renderResult() {
+  renderResult(message) {
     if (this.state.submitResult != null) {
       if (this.state.submitResult === 200) {
         return (
           <Alert severity="success">
             <AlertTitle>Success</AlertTitle>
-            Log in successful!
+            {message}
           </Alert>
         );
       } else {
         return (
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
-            Log in failed!
+            {message}
           </Alert>
         );
       }
@@ -92,16 +121,31 @@ class LoginForm extends Component {
             direction="column"
           >
             <Grid item>
-              <TextField
-                id="email-input"
-                name="email"
-                label="email"
-                variant="outlined"
-                style={{ width: "200px", margin: "5px" }}
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-              />
+              {this.state.invalidEmail ? (
+                <TextField
+                  id="email-input"
+                  name="email"
+                  label="email"
+                  variant="outlined"
+                  error
+                  helperText="Invalid email"
+                  style={{ width: "200px", margin: "5px" }}
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                />
+              ) : (
+                <TextField
+                  id="email-input"
+                  name="email"
+                  label="email"
+                  variant="outlined"
+                  style={{ width: "200px", margin: "5px" }}
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                />
+              )}
             </Grid>
             <Grid item>
               <TextField
@@ -130,7 +174,7 @@ class LoginForm extends Component {
           </Grid>
         </form>
         <div>{this.state.loading && <CircularProgress />}</div>
-        {this.renderResult()}
+        {this.renderResult(this.state.submitMessage)}
       </div>
     );
   }

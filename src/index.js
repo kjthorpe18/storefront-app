@@ -11,7 +11,6 @@ import About from "./views/About";
 import CreateProduct from "./views/CreateProduct";
 import Shop from "./views/Shop";
 
-
 ReactDOM.render(
   <BrowserRouter>
     <Routes>

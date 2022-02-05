@@ -8,6 +8,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import axios from "axios";
 
+import { notBlank, validEmail } from "../helpers/Helpers";
+
 class CreateAccountForm extends Component {
   constructor(props) {
     super(props);
@@ -20,21 +22,11 @@ class CreateAccountForm extends Component {
       invalidEmail: false,
       loading: null,
       submitResult: null,
+      submitMessage: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  validEmail(email) {
-    let result = email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-
-    if (result === null) return false;
-    else return true;
   }
 
   handleInputChange(e) {
@@ -46,8 +38,8 @@ class CreateAccountForm extends Component {
     });
 
     // Validate the input email if that's what changed
-    if (name == "email") {
-      if (!this.validEmail(value)) {
+    if (name === "email") {
+      if (!validEmail(value)) {
         this.setState({ invalidEmail: true });
       } else {
         this.setState({ invalidEmail: false });
@@ -57,6 +49,22 @@ class CreateAccountForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
+    // Check that no inputs are blank
+    let blank_input = false;
+
+    ["email", "password", "first", "last"].forEach((item) => {
+      if (!notBlank(this.state[item])) {
+       blank_input = true;
+      }
+    });
+
+    if (blank_input) {
+      this.setState({ submitMessage: "Inputs cannot be blank." });
+      this.setState({ submitResult: 400 });
+      return;
+    }
+
     this.setState({ loading: true });
 
     axios
@@ -72,29 +80,31 @@ class CreateAccountForm extends Component {
       .then((response) => {
         this.setState({ loading: null });
         this.setState({ submitResult: response.status });
+        this.setState({ submitMessage: "Account creation successful!" });
       })
       .catch((error) => {
         console.log(error);
 
         this.setState({ loading: null });
         this.setState({ submitResult: "Error" });
+        this.setState({ submitMessage: "Account creation failed!" });
       });
   }
 
-  renderResult() {
+  renderResult(message) {
     if (this.state.submitResult != null) {
       if (this.state.submitResult === 201) {
         return (
           <Alert severity="success">
             <AlertTitle>Success</AlertTitle>
-            Account created successfully!
+            {message}
           </Alert>
         );
       } else {
         return (
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
-            Account creation failed!
+            {message}
           </Alert>
         );
       }
@@ -204,7 +214,7 @@ class CreateAccountForm extends Component {
           </Grid>
         </form>
         <div>{this.state.loading && <CircularProgress />}</div>
-        {this.renderResult()}
+        {this.renderResult(this.state.submitMessage)}
       </div>
     );
   }
