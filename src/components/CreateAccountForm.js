@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@mui/material/Button";
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import CircularProgress from '@mui/material/CircularProgress';
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import axios from "axios";
 
@@ -17,12 +17,24 @@ class CreateAccountForm extends Component {
       first: "",
       last: "",
       password: "",
+      invalidEmail: false,
       loading: null,
-      submitResult: null
+      submitResult: null,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  validEmail(email) {
+    let result = email
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+
+    if (result === null) return false;
+    else return true;
   }
 
   handleInputChange(e) {
@@ -30,14 +42,22 @@ class CreateAccountForm extends Component {
     const name = e.target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
-  };
+
+    // Validate the input email if that's what changed
+    if (name == "email") {
+      if (!this.validEmail(value)) {
+        this.setState({ invalidEmail: true });
+      } else {
+        this.setState({ invalidEmail: false });
+      }
+    }
+  }
 
   handleSubmit(event) {
-    // TODO: Check if inputs are empty, valid, etc.
     event.preventDefault();
-    this.setState({loading: "true"});
+    this.setState({ loading: true });
 
     axios
       .post(
@@ -46,34 +66,31 @@ class CreateAccountForm extends Component {
           email: this.state.email,
           password: this.state.password,
           first: this.state.first,
-          last: this.state.last
+          last: this.state.last,
         }
       )
       .then((response) => {
-        console.log(response.status);
-
-        this.setState({loading: null});
-        this.setState({submitResult: response.status});
+        this.setState({ loading: null });
+        this.setState({ submitResult: response.status });
       })
       .catch((error) => {
         console.log(error);
 
-        this.setState({loading: null});
-        this.setState({submitResult: "Error"});
+        this.setState({ loading: null });
+        this.setState({ submitResult: "Error" });
       });
-  };
+  }
 
   renderResult() {
     if (this.state.submitResult != null) {
-      if (this.state.submitResult === 200) {
+      if (this.state.submitResult === 201) {
         return (
           <Alert severity="success">
             <AlertTitle>Success</AlertTitle>
             Account created successfully!
           </Alert>
         );
-      }
-      else {
+      } else {
         return (
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
@@ -82,7 +99,7 @@ class CreateAccountForm extends Component {
         );
       }
     }
-  };
+  }
 
   render() {
     return (
@@ -96,16 +113,31 @@ class CreateAccountForm extends Component {
             direction="column"
           >
             <Grid item>
-              <TextField
-                id="email-input"
-                name="email"
-                label="email"
-                variant="outlined"
-                style={{ width: "200px", margin: "5px" }}
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-              />
+              {this.state.invalidEmail ? (
+                <TextField
+                  id="email-input"
+                  name="email"
+                  label="email"
+                  variant="outlined"
+                  error
+                  helperText="Invalid email"
+                  style={{ width: "200px", margin: "5px" }}
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                />
+              ) : (
+                <TextField
+                  id="email-input"
+                  name="email"
+                  label="email"
+                  variant="outlined"
+                  style={{ width: "200px", margin: "5px" }}
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                />
+              )}
             </Grid>
             <Grid item>
               <TextField
@@ -144,22 +176,34 @@ class CreateAccountForm extends Component {
               />
             </Grid>
             <Grid item>
-              <Button
-                id="submit-button"
-                className="submit-button"
-                variant="outlined"
-                style={{ margin: "5px" }}
-                label="submit"
-                type="submit"
-              >
-                Submit
-              </Button>
+              {this.state.invalidEmail ? (
+                <Button
+                  id="submit-button"
+                  className="submit-button"
+                  variant="outlined"
+                  disabled
+                  style={{ margin: "5px" }}
+                  label="submit"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button
+                  id="submit-button"
+                  className="submit-button"
+                  variant="outlined"
+                  style={{ margin: "5px" }}
+                  label="submit"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              )}
             </Grid>
           </Grid>
         </form>
-        <div>
-          {this.state.loading && <CircularProgress />}
-        </div>
+        <div>{this.state.loading && <CircularProgress />}</div>
         {this.renderResult()}
       </div>
     );
