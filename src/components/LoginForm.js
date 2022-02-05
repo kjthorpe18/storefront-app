@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@mui/material/Button";
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import CircularProgress from '@mui/material/CircularProgress';
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import axios from "axios";
 
@@ -16,7 +16,7 @@ class LoginForm extends Component {
       email: "",
       password: "",
       loading: null,
-      submitResult: null
+      submitResult: null,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -28,37 +28,37 @@ class LoginForm extends Component {
     const name = e.target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
-  };
+  }
 
   handleSubmit(event) {
     // TODO: Check if inputs are empty, valid, etc.
     event.preventDefault();
 
-    this.setState({loading: "true"});
+    this.setState({ loading: "true" });
 
     axios
       .post(
         "https://fvvd85s1e4.execute-api.us-east-2.amazonaws.com/test/users/login",
         {
           email: this.state.email,
-          password: this.state.password
+          password: this.state.password,
         }
       )
       .then((response) => {
         console.log(response.status);
 
-        this.setState({loading: null});
-        this.setState({submitResult: response.status});
+        this.setState({ loading: null });
+        this.setState({ submitResult: response.status });
       })
       .catch((error) => {
         console.log(error);
 
-        this.setState({loading: null});
-        this.setState({submitResult: "Error"});
+        this.setState({ loading: null });
+        this.setState({ submitResult: "Error" });
       });
-  };
+  }
 
   renderResult() {
     if (this.state.submitResult != null) {
@@ -69,8 +69,7 @@ class LoginForm extends Component {
             Log in successful!
           </Alert>
         );
-      }
-      else {
+      } else {
         return (
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
@@ -79,7 +78,7 @@ class LoginForm extends Component {
         );
       }
     }
-  };
+  }
 
   render() {
     return (
@@ -130,9 +129,7 @@ class LoginForm extends Component {
             </Grid>
           </Grid>
         </form>
-        <div>
-          {this.state.loading && <CircularProgress />}
-        </div>
+        <div>{this.state.loading && <CircularProgress />}</div>
         {this.renderResult()}
       </div>
     );

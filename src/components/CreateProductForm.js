@@ -3,9 +3,9 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import CircularProgress from '@mui/material/CircularProgress';
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import CircularProgress from "@mui/material/CircularProgress";
 
 class CreateProductForm extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class CreateProductForm extends Component {
       price: "",
       category: "",
       loading: null,
-      submitResult: null
+      submitResult: null,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -30,15 +30,15 @@ class CreateProductForm extends Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
-  };
+  }
 
   handleSubmit(event) {
     // TODO: Check if inputs are empty, valid, etc.
     event.preventDefault();
 
-    this.setState({loading: "true"});
+    this.setState({ loading: "true" });
 
     axios
       .post(
@@ -47,22 +47,22 @@ class CreateProductForm extends Component {
           name: this.state.name,
           brand: this.state.brand,
           price: this.state.price,
-          category: this.state.category
+          category: this.state.category,
         }
       )
       .then((response) => {
         console.log(response.status);
 
-        this.setState({loading: null});
-        this.setState({submitResult: response.status});
+        this.setState({ loading: null });
+        this.setState({ submitResult: response.status });
       })
       .catch((error) => {
         console.log(error);
 
-        this.setState({loading: null});
-        this.setState({submitResult: "Error"});
+        this.setState({ loading: null });
+        this.setState({ submitResult: "Error" });
       });
-  };
+  }
 
   renderResult() {
     if (this.state.submitResult != null) {
@@ -73,8 +73,7 @@ class CreateProductForm extends Component {
             Product creation successful!
           </Alert>
         );
-      }
-      else {
+      } else {
         return (
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
@@ -83,7 +82,7 @@ class CreateProductForm extends Component {
         );
       }
     }
-  };
+  }
 
   render() {
     return (
@@ -158,9 +157,7 @@ class CreateProductForm extends Component {
             </Grid>
           </Grid>
         </form>
-        <div>
-          {this.state.loading && <CircularProgress />}
-        </div>
+        <div>{this.state.loading && <CircularProgress />}</div>
         {this.renderResult()}
       </div>
     );

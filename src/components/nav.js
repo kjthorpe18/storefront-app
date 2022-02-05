@@ -9,8 +9,8 @@ import ListItemText from "@mui/material/ListItemText";
 import InfoIcon from "@mui/icons-material/Info";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import LoginIcon from '@mui/icons-material/Login';
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LoginIcon from "@mui/icons-material/Login";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 
@@ -75,19 +75,24 @@ class Nav extends Component {
         onKeyDown={() => this.toggleDrawer(false)}
       >
         <List>
-          {["Home", "Create Account", "Log In", "Categories", "Create Product", "About Us"].map(
-            (key, index) => (
-              <ListItem
-                button
-                key={key}
-                component={Link}
-                to={this.linkFromPage(key)}
-              >
-                <ListItemIcon>{this.iconRender(key)}</ListItemIcon>
-                <ListItemText primary={key} />
-              </ListItem>
-            )
-          )}
+          {[
+            "Home",
+            "Create Account",
+            "Log In",
+            "Categories",
+            "Create Product",
+            "About Us",
+          ].map((key, index) => (
+            <ListItem
+              button
+              key={key}
+              component={Link}
+              to={this.linkFromPage(key)}
+            >
+              <ListItemIcon>{this.iconRender(key)}</ListItemIcon>
+              <ListItemText primary={key} />
+            </ListItem>
+          ))}
         </List>
       </Box>
     );

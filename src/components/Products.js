@@ -10,8 +10,7 @@ class Products extends Component {
   }
 
   componentDidMount() {
-    const response =
-    axios
+    const response = axios
       .get(
         "https://fvvd85s1e4.execute-api.us-east-2.amazonaws.com/test/products"
       )
@@ -22,17 +21,13 @@ class Products extends Component {
         console.log(error);
       });
 
-      this.setState({
-        products: response.data
-      })
+    this.setState({
+      products: response.data,
+    });
   }
 
   render() {
-    return (
-      <div>
-        {this.state.products}
-      </div>
-    );
+    return <div>{this.state.products}</div>;
   }
 }
 
