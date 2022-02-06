@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import axios from "axios";
 
-import { notBlank, validEmail } from "../helpers/Helpers";
+import { notBlank, validEmail } from "../helpers/Validation";
 
 class CreateAccountForm extends Component {
   constructor(props) {

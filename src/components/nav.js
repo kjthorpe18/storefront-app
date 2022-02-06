@@ -10,9 +10,12 @@ import InfoIcon from "@mui/icons-material/Info";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PersonIcon from "@mui/icons-material/Person";
 import LoginIcon from "@mui/icons-material/Login";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
+
+import { userLoggedIn } from "../helpers/Authentication";
 
 class Nav extends Component {
   constructor(props) {
@@ -107,10 +110,19 @@ class Nav extends Component {
           alt="logo"
           src={require("../static/logo-example.png")}
         />
-        <div id="menu" className="nav-item">
-          <Button id="menu-button" onClick={() => this.toggleDrawer(true)}>
-            {"Menu"}
-          </Button>
+        <div id="navbar-flexbox" className="nav-item">
+          {userLoggedIn() && (
+            <div id="user" className="nav-item navbar-flexbox-item">
+              <Button id="user-button">
+                <PersonIcon fontSize="medium" />
+              </Button>
+            </div>
+          )}
+          <div id="menu" className="nav-item navbar-flexbox-item">
+            <Button id="menu-button" onClick={() => this.toggleDrawer(true)}>
+              {"Menu"}
+            </Button>
+          </div>
         </div>
         <Drawer
           anchor={"right"}

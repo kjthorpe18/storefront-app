@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import axios from "axios";
 
-import { notBlank, validEmail } from "../helpers/Helpers";
+import { notBlank, validEmail } from "../helpers/Validation";
 
 class LoginForm extends Component {
   constructor(props) {
@@ -79,6 +79,9 @@ class LoginForm extends Component {
         this.setState({ loading: null });
         this.setState({ submitResult: response.status });
         this.setState({ submitMessage: "Log in successful!" });
+
+        // Store user info in browser
+        localStorage.setItem("user", this.state.email);
       })
       .catch((error) => {
         console.log(error);

@@ -55,6 +55,19 @@ body {
 
 .nav-item {
   max-height: inherit;
+  height: inherit;
+}
+
+#navbar-flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: inherit;
+}
+
+.navbar-flexbox-item {
+  margin: 5px;
+  height: inherit;
 }
 
 #footer {
@@ -78,18 +91,33 @@ body {
 }
 
 #menu {
-  float: right;
-  height: inherit;
+  order: 2;
 }
 
 #menu-button {
-  height: 85%;
   color: black;
   border: 1px solid black;
-  margin: 3px;
+  max-height: 38px;
 }
 
 #menu-button:hover {
+  color: rgba(46, 46, 46, 0.815);
+  background-color: rgba(161, 161, 161, 0.815);
+  border: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#user {
+  order: 1;
+}
+
+#user-button {
+  color: black;
+  border: 1px solid black;
+  min-height: inherit;
+}
+
+#user-button:hover {
   color: rgba(46, 46, 46, 0.815);
   background-color: rgba(161, 161, 161, 0.815);
   border: 1px solid black;

@@ -7,7 +7,7 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import { notBlank } from "../helpers/Helpers";
+import { notBlank } from "../helpers/Validation";
 
 class CreateProductForm extends Component {
   constructor(props) {
