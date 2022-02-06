@@ -6,7 +6,7 @@ on:
     - master
 
 jobs:
-  deploy:
+  deploy-to-s3:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
