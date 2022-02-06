@@ -35,7 +35,6 @@ class LoginForm extends Component {
       [name]: value,
     });
 
-    // Validate the input email if that's what changed
     if (name === "email") {
       if (!validEmail(value)) {
         this.setState({ invalidEmail: true });
@@ -48,7 +47,6 @@ class LoginForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    // Check that no inputs are blank
     let blank_input = false;
 
     ["email", "password"].forEach((item) => {
@@ -80,7 +78,6 @@ class LoginForm extends Component {
         this.setState({ submitResult: response.status });
         this.setState({ submitMessage: "Log in successful!" });
 
-        // Store user info in browser
         localStorage.setItem("user", this.state.email);
       })
       .catch((error) => {

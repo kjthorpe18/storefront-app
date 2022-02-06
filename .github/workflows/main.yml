@@ -23,7 +23,7 @@ jobs:
       run: yarn install
 
     - name: Build
-      run: yarn run build
+      run: yarn build
 
     - name: Deploy static site to S3 bucket
       run: aws s3 sync build/ s3://storefront-site --delete

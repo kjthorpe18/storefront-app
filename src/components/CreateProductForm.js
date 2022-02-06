@@ -40,7 +40,6 @@ class CreateProductForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    // Check that no inputs are blank
     let blank_input = false;
 
     ["name", "brand", "price", "category"].forEach((item) => {
@@ -55,7 +54,6 @@ class CreateProductForm extends Component {
       return;
     }
 
-    // No blank inputs, make the request
     this.setState({ loading: "true" });
 
     axios

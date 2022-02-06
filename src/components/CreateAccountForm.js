@@ -37,7 +37,6 @@ class CreateAccountForm extends Component {
       [name]: value,
     });
 
-    // Validate the input email if that's what changed
     if (name === "email") {
       if (!validEmail(value)) {
         this.setState({ invalidEmail: true });
@@ -50,7 +49,6 @@ class CreateAccountForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    // Check that no inputs are blank
     let blank_input = false;
 
     ["email", "password", "first", "last"].forEach((item) => {
