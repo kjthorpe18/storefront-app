@@ -20,7 +20,7 @@ class CreateProductForm extends Component {
       category: "",
       loading: null,
       submitResult: null,
-      submitMessage: ""
+      submitMessage: "",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -45,7 +45,7 @@ class CreateProductForm extends Component {
 
     ["name", "brand", "price", "category"].forEach((item) => {
       if (!notBlank(this.state[item])) {
-       blank_input = true;
+        blank_input = true;
       }
     });
 

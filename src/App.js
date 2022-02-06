@@ -9,18 +9,16 @@ import CreateProduct from "./views/CreateProduct";
 import Shop from "./views/Shop";
 
 function App() {
-  return(
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="about" element={<About />} />
-          <Route path="create-product" element={<CreateProduct />} />
-          <Route path="shop" element={<Shop />} />
-          <Route path="create-account" element={<CreateAccount />} />
-          <Route path="login" element={<Login />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="about" element={<About />} />
+        <Route path="create-product" element={<CreateProduct />} />
+        <Route path="shop" element={<Shop />} />
+        <Route path="create-account" element={<CreateAccount />} />
+        <Route path="login" element={<Login />} />
+      </Route>
+    </Routes>
   );
 }
 

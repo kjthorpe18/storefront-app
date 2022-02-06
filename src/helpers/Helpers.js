@@ -1,5 +1,4 @@
 export function notBlank(input) {
-
   if (input.trim() === "") return false;
   else return true;
 }

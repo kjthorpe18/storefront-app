@@ -17,8 +17,11 @@ import App from "./App";
 
 // onEnter={requireAuth}
 
-
 ReactDOM.render(
-  <App />,
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById("root")
 );

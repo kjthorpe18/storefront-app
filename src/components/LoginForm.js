@@ -20,7 +20,7 @@ class LoginForm extends Component {
       invalidEmail: false,
       loading: null,
       submitResult: null,
-      submitMessage: ""
+      submitMessage: "",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -53,7 +53,7 @@ class LoginForm extends Component {
 
     ["email", "password"].forEach((item) => {
       if (!notBlank(this.state[item])) {
-       blank_input = true;
+        blank_input = true;
       }
     });
 
