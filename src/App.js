@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout";
+import Account from "./components/Account";
 import CreateAccount from "./views/CreateAccount";
 import Login from "./views/Login";
 import About from "./views/About";
@@ -15,6 +16,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="create-product" element={<CreateProduct />} />
         <Route path="shop" element={<Shop />} />
+        <Route path="account" element={<Account />} />
         <Route path="create-account" element={<CreateAccount />} />
         <Route path="login" element={<Login />} />
       </Route>

@@ -7,10 +7,9 @@ import AlertTitle from "@mui/material/AlertTitle";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import axios from "axios";
-
 import { notBlank, validEmail } from "../helpers/Validation";
 
-class CreateAccountForm extends Component {
+class Account extends Component {
   constructor(props) {
     super(props);
 
@@ -18,7 +17,6 @@ class CreateAccountForm extends Component {
       email: "",
       first: "",
       last: "",
-      password: "",
       invalidEmail: false,
       loading: null,
       submitResult: null,
@@ -27,6 +25,27 @@ class CreateAccountForm extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    let email = localStorage.getItem("user");
+
+    axios
+      .get(
+        "https://fvvd85s1e4.execute-api.us-east-2.amazonaws.com/test/users/?email=" +
+          email
+      )
+      .then((response) => {
+        this.setState({
+          email: response.data.email,
+          password: response.data.password,
+          first: response.data.first,
+          last: response.data.last,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   handleInputChange(e) {
@@ -66,9 +85,10 @@ class CreateAccountForm extends Component {
     }
 
     this.setState({ loading: true });
+    console.log(this.state);
 
     axios
-      .post(
+      .put(
         "https://fvvd85s1e4.execute-api.us-east-2.amazonaws.com/test/users",
         {
           email: this.state.email,
@@ -80,20 +100,20 @@ class CreateAccountForm extends Component {
       .then((response) => {
         this.setState({ loading: null });
         this.setState({ submitResult: response.status });
-        this.setState({ submitMessage: "Account creation successful!" });
+        this.setState({ submitMessage: "Account update successful!" });
       })
       .catch((error) => {
         console.log(error);
 
         this.setState({ loading: null });
         this.setState({ submitResult: "Error" });
-        this.setState({ submitMessage: "Account creation failed!" });
+        this.setState({ submitMessage: "Account update failed!" });
       });
   }
 
   renderResult(message) {
     if (this.state.submitResult != null) {
-      if (this.state.submitResult === 201) {
+      if (this.state.submitResult === 204) {
         return (
           <Alert severity="success">
             <AlertTitle>Success</AlertTitle>
@@ -113,8 +133,8 @@ class CreateAccountForm extends Component {
 
   render() {
     return (
-      <div className="form" id="create-account-form">
-        <h2 className="form-header">Create an Account</h2>
+      <div>
+        <h2 className="form-header">Account</h2>
         <form onSubmit={this.handleSubmit}>
           <Grid
             container
@@ -148,18 +168,6 @@ class CreateAccountForm extends Component {
                   onChange={this.handleInputChange}
                 />
               )}
-            </Grid>
-            <Grid item>
-              <TextField
-                id="password-input"
-                name="password"
-                label="password"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
-              />
             </Grid>
             <Grid item>
               <TextField
@@ -200,14 +208,14 @@ class CreateAccountForm extends Component {
                 </Button>
               ) : (
                 <Button
-                  id="submit-button"
-                  className="submit-button"
+                  id="update-button"
+                  className="update-button"
                   variant="outlined"
                   style={{ margin: "5px", width: "200px", height: "50px" }}
-                  label="submit"
+                  label="update"
                   type="submit"
                 >
-                  Submit
+                  Update
                 </Button>
               )}
             </Grid>
@@ -220,4 +228,4 @@ class CreateAccountForm extends Component {
   }
 }
 
-export default CreateAccountForm;
+export default Account;

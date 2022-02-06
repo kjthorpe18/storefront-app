@@ -11,7 +11,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
-import LoginIcon from "@mui/icons-material/Login";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 
@@ -37,8 +36,6 @@ class Nav extends Component {
         return <HomeIcon />;
       case "Create Account":
         return <PersonAddIcon />;
-      case "Log In":
-        return <LoginIcon />;
       case "About Us":
         return <InfoIcon />;
       case "Create Product":
@@ -56,8 +53,6 @@ class Nav extends Component {
         return "/";
       case "Create Account":
         return "/create-account";
-      case "Log In":
-        return "/login";
       case "About Us":
         return "/about";
       case "Create Product":
@@ -81,7 +76,6 @@ class Nav extends Component {
           {[
             "Home",
             "Create Account",
-            "Log In",
             "Categories",
             "Create Product",
             "About Us",
@@ -110,20 +104,31 @@ class Nav extends Component {
           alt="logo"
           src={require("../static/logo-example.png")}
         />
+
         <div id="navbar-flexbox" className="nav-item">
-          {userLoggedIn() && (
+          {userLoggedIn() ? (
             <div id="user" className="nav-item navbar-flexbox-item">
-              <Button id="user-button">
-                <PersonIcon fontSize="medium" />
-              </Button>
+              <Link to="/account" style={{ textDecoration: "none" }}>
+                <Button id="user-button">
+                  <PersonIcon fontSize="medium" />
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <div id="user" className="nav-item navbar-flexbox-item">
+              <Link to="/login" style={{ textDecoration: "none" }}>
+                <Button id="user-button">{"Sign In"}</Button>
+              </Link>
             </div>
           )}
+
           <div id="menu" className="nav-item navbar-flexbox-item">
             <Button id="menu-button" onClick={() => this.toggleDrawer(true)}>
               {"Menu"}
             </Button>
           </div>
         </div>
+
         <Drawer
           anchor={"right"}
           open={this.state.right}
