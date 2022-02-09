@@ -1,6 +1,5 @@
 export function notBlank(input) {
-  if (input.trim() === "") return false;
-  else return true;
+  return input.trim() !== "";
 }
 
 export function validEmail(email) {
@@ -10,6 +9,9 @@ export function validEmail(email) {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 
-  if (result === null) return false;
-  else return true;
+  return result !== null;
+}
+
+export function passwordsMatch(pass1, pass2) {
+  return pass1 === pass2;
 }
