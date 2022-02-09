@@ -90,7 +90,7 @@ class LoginForm extends Component {
   }
 
   renderResult(message) {
-    if (this.state.submitResult != null) {
+    if (this.state.submitResult !== null) {
       if (this.state.submitResult === 200) {
         return (
           <Alert severity="success">

@@ -83,7 +83,7 @@ class CreateProductForm extends Component {
   }
 
   renderResult(message) {
-    if (this.state.submitResult != null) {
+    if (this.state.submitResult !== null) {
       if (this.state.submitResult === 201) {
         return (
           <Alert severity="success">

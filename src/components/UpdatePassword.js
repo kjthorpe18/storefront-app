@@ -100,7 +100,7 @@ class UpdatePassword extends Component {
     }
 
     // Confirm old password is correct
-    if (this.state.oldPassword != this.state.confirmOldPassword) {
+    if (this.state.oldPassword !== this.state.confirmOldPassword) {
       this.setState({ oldPasswordsMatch: false });
       this.setState({ submitResult: 400 });
       this.setState({ submitMessage: "Current password incorrect." });
@@ -137,7 +137,7 @@ class UpdatePassword extends Component {
   }
 
   renderResult(message) {
-    if (this.state.submitResult != null) {
+    if (this.state.submitResult !== null) {
       if (this.state.submitResult === 204) {
         return (
           <Alert severity="success">
