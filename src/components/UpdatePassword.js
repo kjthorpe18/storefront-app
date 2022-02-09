@@ -5,20 +5,25 @@ import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Link } from "react-router-dom";
 
 import axios from "axios";
-import { notBlank, validEmail } from "../helpers/Validation";
+import { notBlank, passwordsMatch } from "../helpers/Validation";
 
-class Account extends Component {
+class UpdatePassword extends Component {
   constructor(props) {
     super(props);
 
+    // Don't update first, last, and email, but leaving them lets us update user endpoint
     this.state = {
-      email: "",
       first: "",
       last: "",
-      invalidEmail: false,
+      email: "",
+      oldPassword: "",
+      confirmOldPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
+      newPasswordsMatch: true,
+      oldPasswordsMatch: false,
       loading: null,
       submitResult: null,
       submitMessage: "",
@@ -39,7 +44,7 @@ class Account extends Component {
       .then((response) => {
         this.setState({
           email: response.data.email,
-          password: response.data.password,
+          oldPassword: response.data.password,
           first: response.data.first,
           last: response.data.last,
         });
@@ -57,13 +62,22 @@ class Account extends Component {
       [name]: value,
     });
 
-    if (name === "email") {
-      if (!validEmail(value)) {
-        this.setState({ invalidEmail: true });
-      } else {
-        this.setState({ invalidEmail: false });
-      }
+    // State lags behind, so get the updated value
+    let newPass = "";
+    let confirmNewPass = "";
+
+    if (name === "newPassword") {
+      newPass = value;
+      confirmNewPass = this.state.confirmNewPassword;
+    } else if (name === "confirmNewPassword") {
+      newPass = this.state.newPassword;
+      confirmNewPass = value;
     }
+
+    // Ensure new password and confirm new password match
+    this.setState({
+      newPasswordsMatch: passwordsMatch(newPass, confirmNewPass),
+    });
   }
 
   handleSubmit(event) {
@@ -71,16 +85,28 @@ class Account extends Component {
 
     let blank_input = false;
 
-    ["email", "password", "first", "last"].forEach((item) => {
-      if (!notBlank(this.state[item])) {
-        blank_input = true;
+    ["confirmOldPassword", "newPassword", "confirmNewPassword"].forEach(
+      (item) => {
+        if (!notBlank(this.state[item])) {
+          blank_input = true;
+        }
       }
-    });
+    );
 
     if (blank_input) {
       this.setState({ submitMessage: "Inputs cannot be blank." });
       this.setState({ submitResult: 400 });
       return;
+    }
+
+    // Confirm old password is correct
+    if (this.state.oldPassword != this.state.confirmOldPassword) {
+      this.setState({ oldPasswordsMatch: false });
+      this.setState({ submitResult: 400 });
+      this.setState({ submitMessage: "Current password incorrect." });
+      return;
+    } else {
+      this.setState({ oldPasswordsMatch: true });
     }
 
     this.setState({ loading: true });
@@ -91,7 +117,7 @@ class Account extends Component {
         "https://fvvd85s1e4.execute-api.us-east-2.amazonaws.com/test/users",
         {
           email: this.state.email,
-          password: this.state.password,
+          password: this.state.newPassword,
           first: this.state.first,
           last: this.state.last,
         }
@@ -99,14 +125,14 @@ class Account extends Component {
       .then((response) => {
         this.setState({ loading: null });
         this.setState({ submitResult: response.status });
-        this.setState({ submitMessage: "Account update successful!" });
+        this.setState({ submitMessage: "Password update successful!" });
       })
       .catch((error) => {
         console.log(error);
 
         this.setState({ loading: null });
         this.setState({ submitResult: "Error" });
-        this.setState({ submitMessage: "Account update failed!" });
+        this.setState({ submitMessage: "Password update failed!" });
       });
   }
 
@@ -133,7 +159,7 @@ class Account extends Component {
   render() {
     return (
       <div>
-        <h2 className="form-header">Account</h2>
+        <h2 className="form-header">Update Password</h2>
         <form onSubmit={this.handleSubmit}>
           <Grid
             container
@@ -143,83 +169,53 @@ class Account extends Component {
           >
             <Grid item>
               <TextField
-                id="email-input"
-                name="email"
-                label="email"
+                id="current-password-input"
+                name="confirmOldPassword"
+                label="Current Password"
                 variant="outlined"
-                error={this.state.invalidEmail ? true : false}
-                helperText={this.state.invalidEmail ? "Invalid email" : null}
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="password-input"
-                name="password"
-                label="password"
-                variant="outlined"
-                disabled
-                InputProps={{readOnly: true}}
-                InputLabelProps={{shrink: true}}
                 style={{ width: "300px", margin: "5px" }}
                 type="password"
-                value={"**********"}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <Link to="/update-password" style={{ textDecoration: "none" }}>
-                <Button
-                  id="update-password-button"
-                  className="update-password-button"
-                  variant="outlined"
-                  disabled={this.state.invalidEmail ? true : false}
-                  style={{ margin: "5px" }}
-                  label="Update Password"
-                  type="submit"
-                >
-                  Update Password
-                </Button>
-              </Link>
-            </Grid>
-            <Grid item>
-              <TextField
-                id="first-input"
-                name="first"
-                label="first"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.first}
+                value={this.state.confirmOldPassword}
                 onChange={this.handleInputChange}
               />
             </Grid>
             <Grid item>
               <TextField
-                id="last-input"
-                name="last"
-                label="last"
+                id="new-password-input"
+                name="newPassword"
+                label="New Password"
                 variant="outlined"
+                error={this.state.newPasswordsMatch ? false : true}
                 style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.last}
+                type="password"
+                value={this.state.newPassword}
+                onChange={this.handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="confirm-new-password-input"
+                name="confirmNewPassword"
+                label="Confirm New Password"
+                variant="outlined"
+                error={this.state.newPasswordsMatch ? false : true}
+                style={{ width: "300px", margin: "5px" }}
+                type="password"
+                value={this.state.confirmNewPassword}
                 onChange={this.handleInputChange}
               />
             </Grid>
             <Grid item>
               <Button
-                id="submit-button"
-                className="submit-button"
+                id="update-button"
+                className="update-button"
                 variant="outlined"
-                disabled={this.state.invalidEmail ? true : false}
+                disabled={this.state.newPasswordsMatch ? false : true}
                 style={{ margin: "5px" }}
-                label="submit"
+                label="Update"
                 type="submit"
               >
-                Submit
+                Update
               </Button>
             </Grid>
           </Grid>
@@ -231,4 +227,4 @@ class Account extends Component {
   }
 }
 
-export default Account;
+export default UpdatePassword;

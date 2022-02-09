@@ -12,9 +12,10 @@ import CategoryIcon from "@mui/icons-material/Category";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
 import AddIcon from "@mui/icons-material/Add";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 
-import { userLoggedIn } from "../helpers/Authentication";
+import { userLoggedIn, logOutUser } from "../helpers/Authentication";
 
 class Nav extends Component {
   constructor(props) {
@@ -90,6 +91,20 @@ class Nav extends Component {
               <ListItemText primary={key} />
             </ListItem>
           ))}
+          {userLoggedIn() && (
+            <ListItem
+              button
+              key={"Log Out"}
+              component={Link}
+              to={"/home"}
+              onClick={() => logOutUser(false)}
+            >
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Log Out"} />
+            </ListItem>
+          )}
         </List>
       </Box>
     );
