@@ -121,37 +121,24 @@ class LoginForm extends Component {
             direction="column"
           >
             <Grid item>
-              {this.state.invalidEmail ? (
-                <TextField
-                  id="email-input"
-                  name="email"
-                  label="email"
-                  variant="outlined"
-                  error
-                  helperText="Invalid email"
-                  style={{ width: "200px", margin: "5px" }}
-                  type="text"
-                  value={this.state.email}
-                  onChange={this.handleInputChange}
-                />
-              ) : (
-                <TextField
-                  id="email-input"
-                  name="email"
-                  label="email"
-                  variant="outlined"
-                  style={{ width: "200px", margin: "5px" }}
-                  type="text"
-                  value={this.state.email}
-                  onChange={this.handleInputChange}
-                />
-              )}
+              <TextField
+                id="email-input"
+                name="email"
+                label="Email"
+                variant="outlined"
+                error={this.state.invalidEmail}
+                helperText={this.state.invalidEmail ? "Invalid email" : null}
+                style={{ width: "200px", margin: "5px" }}
+                type="text"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+              />
             </Grid>
             <Grid item>
               <TextField
                 id="password-input"
                 name="password"
-                label="password"
+                label="Password"
                 variant="outlined"
                 style={{ width: "200px", margin: "5px" }}
                 type="password"
@@ -165,7 +152,7 @@ class LoginForm extends Component {
                 className="submit-button"
                 variant="outlined"
                 style={{ margin: "5px" }}
-                label="submit"
+                label="Submit"
                 type="submit"
               >
                 Submit

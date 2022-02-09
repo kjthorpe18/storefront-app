@@ -117,7 +117,7 @@ class CreateProductForm extends Component {
               <TextField
                 id="name-input"
                 name="name"
-                label="name"
+                label="Name"
                 variant="outlined"
                 style={{ width: "200px", margin: "5px" }}
                 type="text"
@@ -129,7 +129,7 @@ class CreateProductForm extends Component {
               <TextField
                 id="brand-input"
                 name="brand"
-                label="brand"
+                label="Brand"
                 variant="outlined"
                 style={{ width: "200px", margin: "5px" }}
                 type="text"
@@ -141,7 +141,7 @@ class CreateProductForm extends Component {
               <TextField
                 id="price-input"
                 name="price"
-                label="price"
+                label="Price"
                 variant="outlined"
                 style={{ width: "200px", margin: "5px" }}
                 type="text"
@@ -153,7 +153,7 @@ class CreateProductForm extends Component {
               <TextField
                 id="category-input"
                 name="category"
-                label="category"
+                label="Category"
                 variant="outlined"
                 style={{ width: "200px", margin: "5px" }}
                 type="text"
@@ -167,7 +167,7 @@ class CreateProductForm extends Component {
                 className="submit-button"
                 variant="outlined"
                 style={{ margin: "5px" }}
-                label="submit"
+                label="Submit"
                 type="submit"
               >
                 Submit

@@ -145,7 +145,7 @@ class Account extends Component {
               <TextField
                 id="email-input"
                 name="email"
-                label="email"
+                label="Email"
                 variant="outlined"
                 error={this.state.invalidEmail ? true : false}
                 helperText={this.state.invalidEmail ? "Invalid email" : null}
@@ -159,7 +159,7 @@ class Account extends Component {
               <TextField
                 id="password-input"
                 name="password"
-                label="password"
+                label="Password"
                 variant="outlined"
                 disabled
                 InputProps={{readOnly: true}}
@@ -189,7 +189,7 @@ class Account extends Component {
               <TextField
                 id="first-input"
                 name="first"
-                label="first"
+                label="First Name"
                 variant="outlined"
                 style={{ width: "300px", margin: "5px" }}
                 type="text"
@@ -201,7 +201,7 @@ class Account extends Component {
               <TextField
                 id="last-input"
                 name="last"
-                label="last"
+                label="Last Name"
                 variant="outlined"
                 style={{ width: "300px", margin: "5px" }}
                 type="text"
@@ -216,7 +216,7 @@ class Account extends Component {
                 variant="outlined"
                 disabled={this.state.invalidEmail ? true : false}
                 style={{ margin: "5px" }}
-                label="submit"
+                label="Submit"
                 type="submit"
               >
                 Submit
