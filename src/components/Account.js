@@ -213,7 +213,7 @@ class Account extends Component {
               <Button
                 id="submit-button"
                 className="submit-button"
-                variant="outlined"
+                variant="contained"
                 disabled={this.state.invalidEmail ? true : false}
                 style={{ margin: "5px" }}
                 label="Submit"

@@ -174,7 +174,7 @@ class CreateAccountForm extends Component {
                 <Button
                   id="submit-button"
                   className="submit-button"
-                  variant="outlined"
+                  variant="contained"
                   disabled={this.state.invalidEmail}
                   style={{ margin: "5px" }}
                   label="Submit"

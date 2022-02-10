@@ -209,7 +209,7 @@ class UpdatePassword extends Component {
               <Button
                 id="update-button"
                 className="update-button"
-                variant="outlined"
+                variant="contained"
                 disabled={this.state.newPasswordsMatch ? false : true}
                 style={{ margin: "5px" }}
                 label="Update"

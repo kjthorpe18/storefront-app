@@ -150,7 +150,7 @@ class LoginForm extends Component {
               <Button
                 id="submit-button"
                 className="submit-button"
-                variant="outlined"
+                variant="contained"
                 style={{ margin: "5px" }}
                 label="Submit"
                 type="submit"
