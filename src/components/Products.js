@@ -5,7 +5,7 @@ class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [],
+      products: []
     };
   }
 
@@ -22,7 +22,7 @@ class Products extends Component {
       });
 
     this.setState({
-      products: response.data,
+      products: response.data
     });
   }
 

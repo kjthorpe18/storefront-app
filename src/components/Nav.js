@@ -27,7 +27,7 @@ class Nav extends Component {
 
   toggleDrawer(open) {
     this.setState({
-      right: open,
+      right: open
     });
   }
 
@@ -79,7 +79,7 @@ class Nav extends Component {
             "Create Account",
             "Categories",
             "Create Product",
-            "About Us",
+            "About Us"
           ].map((key, index) => (
             <ListItem
               button
@@ -137,6 +137,15 @@ class Nav extends Component {
             </div>
           )}
 
+          {!userLoggedIn() && (
+            <div id="create-account" className="nav-item navbar-flexbox-item">
+              <Link to="/create-account" style={{ textDecoration: "none" }}>
+                <Button id="user-button">
+                  <PersonAddIcon fontSize="medium" />
+                </Button>
+              </Link>
+            </div>
+          )}
           <div id="menu" className="nav-item navbar-flexbox-item">
             <Button id="menu-button" onClick={() => this.toggleDrawer(true)}>
               {"Menu"}

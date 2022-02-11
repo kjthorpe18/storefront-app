@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@mui/material/Button";
@@ -20,7 +21,7 @@ class LoginForm extends Component {
       invalidEmail: false,
       loading: null,
       submitResult: null,
-      submitMessage: "",
+      submitMessage: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -32,7 +33,7 @@ class LoginForm extends Component {
     const name = e.target.name;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
 
     if (name === "email") {
@@ -68,7 +69,7 @@ class LoginForm extends Component {
         "https://fvvd85s1e4.execute-api.us-east-2.amazonaws.com/test/users/login",
         {
           email: this.state.email,
-          password: this.state.password,
+          password: this.state.password
         }
       )
       .then((response) => {
@@ -162,6 +163,23 @@ class LoginForm extends Component {
         </form>
         <div>{this.state.loading && <CircularProgress />}</div>
         {this.renderResult(this.state.submitMessage)}
+        <div className="create-account-option">
+          <h5 className="create-account-button">
+            No account? Create one below
+          </h5>
+          <Link to="/create-account" style={{ textDecoration: "none" }}>
+            <Button
+              id="create-account-button"
+              variant="outlined"
+              disabled={this.state.invalidEmail ? true : false}
+              style={{ margin: "5px" }}
+              label="Create Account"
+              type="submit"
+            >
+              Create Account
+            </Button>
+          </Link>
+        </div>
       </div>
     );
   }

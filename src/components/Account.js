@@ -21,7 +21,7 @@ class Account extends Component {
       invalidEmail: false,
       loading: null,
       submitResult: null,
-      submitMessage: "",
+      submitMessage: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -30,6 +30,7 @@ class Account extends Component {
 
   componentDidMount() {
     let email = localStorage.getItem("user");
+    this.setState({ loading: true });
 
     axios
       .get(
@@ -42,6 +43,7 @@ class Account extends Component {
           password: response.data.password,
           first: response.data.first,
           last: response.data.last,
+          loading: false
         });
       })
       .catch(function (error) {
@@ -54,7 +56,7 @@ class Account extends Component {
     const name = e.target.name;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
 
     if (name === "email") {
@@ -93,7 +95,7 @@ class Account extends Component {
           email: this.state.email,
           password: this.state.password,
           first: this.state.first,
-          last: this.state.last,
+          last: this.state.last
         }
       )
       .then((response) => {
@@ -162,8 +164,8 @@ class Account extends Component {
                 label="Password"
                 variant="outlined"
                 disabled
-                InputProps={{readOnly: true}}
-                InputLabelProps={{shrink: true}}
+                InputProps={{ readOnly: true }}
+                InputLabelProps={{ shrink: true }}
                 style={{ width: "300px", margin: "5px" }}
                 type="password"
                 value={"**********"}

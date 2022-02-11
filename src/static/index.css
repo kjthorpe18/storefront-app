@@ -91,7 +91,7 @@ body {
 }
 
 #menu {
-  order: 2;
+  order: 3;
 }
 
 #menu-button {
@@ -108,6 +108,10 @@ body {
 }
 
 #user {
+  order: 2;
+}
+
+#create-account {
   order: 1;
 }
 
@@ -134,4 +138,9 @@ body {
 .image-feedback {
   margin: 5px;
   font-size: small;
+}
+
+.create-account-button {
+  margin: 5px;
+  margin-top: 15px;
 }

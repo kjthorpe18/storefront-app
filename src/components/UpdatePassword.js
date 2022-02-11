@@ -26,7 +26,7 @@ class UpdatePassword extends Component {
       oldPasswordsMatch: false,
       loading: null,
       submitResult: null,
-      submitMessage: "",
+      submitMessage: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -46,7 +46,7 @@ class UpdatePassword extends Component {
           email: response.data.email,
           oldPassword: response.data.password,
           first: response.data.first,
-          last: response.data.last,
+          last: response.data.last
         });
       })
       .catch(function (error) {
@@ -59,7 +59,7 @@ class UpdatePassword extends Component {
     const name = e.target.name;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
 
     // State lags behind, so get the updated value
@@ -76,7 +76,7 @@ class UpdatePassword extends Component {
 
     // Ensure new password and confirm new password match
     this.setState({
-      newPasswordsMatch: passwordsMatch(newPass, confirmNewPass),
+      newPasswordsMatch: passwordsMatch(newPass, confirmNewPass)
     });
   }
 
@@ -119,7 +119,7 @@ class UpdatePassword extends Component {
           email: this.state.email,
           password: this.state.newPassword,
           first: this.state.first,
-          last: this.state.last,
+          last: this.state.last
         }
       )
       .then((response) => {
