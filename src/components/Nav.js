@@ -113,12 +113,16 @@ class Nav extends Component {
   render() {
     return (
       <nav id="navbar" className="sticky-top">
-        <img
-          id="logo"
-          className="nav-item"
-          alt="logo"
-          src={require("../static/logo-example.png")}
-        />
+        <div id="logo" className="nav-item">
+          <Link to="/home" style={{ textDecoration: "none" }}>
+            <img
+              id="logo"
+              className="logo-image"
+              alt="logo"
+              src={require("../static/images/draft-logo-blue.png")}
+            />
+          </Link>
+        </div>
 
         <div id="navbar-flexbox" className="nav-item">
           {userLoggedIn() ? (

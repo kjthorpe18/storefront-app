@@ -88,6 +88,15 @@ body {
 
 #logo {
   float: left;
+  max-height: inherit;
+}
+
+#logo a {
+  max-height: inherit;
+}
+
+.logo-image {
+  max-height: inherit;
 }
 
 #menu {
