@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { notBlank } from "../helpers/Validation";
 
-class CreateProductForm extends Component {
+class CreateProduct extends Component {
   constructor(props) {
     super(props);
 
@@ -18,13 +18,28 @@ class CreateProductForm extends Component {
       brand: "",
       price: "",
       category: "",
+      image: null,
+      previewImage: null,
       loading: null,
       submitResult: null,
-      submitMessage: "",
+      submitMessage: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFileChange = this.handleFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleFileChange(e) {
+    console.log("new file uploaded");
+
+    let url = URL.createObjectURL(e.target.files[0]);
+
+    console.log(url);
+    this.setState({
+      previewImage: url,
+      image: e.target.files[0]
+    });
   }
 
   handleInputChange(e) {
@@ -33,7 +48,7 @@ class CreateProductForm extends Component {
     const name = target.name;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
   }
 
@@ -64,10 +79,11 @@ class CreateProductForm extends Component {
           brand: this.state.brand,
           price: this.state.price,
           category: this.state.category,
+          image: this.state.image
         }
       )
       .then((response) => {
-        console.log(response.status);
+        console.log(response);
 
         this.setState({ loading: null });
         this.setState({ submitResult: response.status });
@@ -104,6 +120,7 @@ class CreateProductForm extends Component {
 
   render() {
     return (
+      <div className="form-container">
       <div id="create-product-form">
         <h2 className="form-header">Create a Product</h2>
         <form onSubmit={this.handleSubmit}>
@@ -119,7 +136,7 @@ class CreateProductForm extends Component {
                 name="name"
                 label="Name"
                 variant="outlined"
-                style={{ width: "200px", margin: "5px" }}
+                style={{ width: "300px", margin: "5px" }}
                 type="text"
                 value={this.state.name}
                 onChange={this.handleInputChange}
@@ -131,7 +148,7 @@ class CreateProductForm extends Component {
                 name="brand"
                 label="Brand"
                 variant="outlined"
-                style={{ width: "200px", margin: "5px" }}
+                style={{ width: "300px", margin: "5px" }}
                 type="text"
                 value={this.state.brand}
                 onChange={this.handleInputChange}
@@ -143,7 +160,7 @@ class CreateProductForm extends Component {
                 name="price"
                 label="Price"
                 variant="outlined"
-                style={{ width: "200px", margin: "5px" }}
+                style={{ width: "300px", margin: "5px" }}
                 type="text"
                 value={this.state.price}
                 onChange={this.handleInputChange}
@@ -155,7 +172,7 @@ class CreateProductForm extends Component {
                 name="category"
                 label="Category"
                 variant="outlined"
-                style={{ width: "200px", margin: "5px" }}
+                style={{ width: "300px", margin: "5px" }}
                 type="text"
                 value={this.state.category}
                 onChange={this.handleInputChange}
@@ -163,9 +180,23 @@ class CreateProductForm extends Component {
             </Grid>
             <Grid item>
               <Button
+                variant="outlined"
+                component="label"
+                fontSize="small"
+                style={{ fontSize: "12px", margin: "5px" }}
+              >
+                Upload Product Image
+                <input type="file" onChange={this.handleFileChange} hidden />
+              </Button>
+              <p className="image-feedback">
+                {this.state.image !== null && "File: " + this.state.image.name}
+              </p>
+            </Grid>
+            <Grid item>
+              <Button
                 id="submit-button"
                 className="submit-button"
-                variant="outlined"
+                variant="contained"
                 style={{ margin: "5px" }}
                 label="Submit"
                 type="submit"
@@ -178,8 +209,9 @@ class CreateProductForm extends Component {
         <div>{this.state.loading && <CircularProgress />}</div>
         {this.renderResult(this.state.submitMessage)}
       </div>
+      </div>
     );
   }
 }
 
-export default CreateProductForm;
+export default CreateProduct;

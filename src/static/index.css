@@ -141,7 +141,10 @@ body {
   margin: 5px;
 }
 
-.form {
+.form-container {
+  width:100%;
+  display: flex;
+  justify-content: center;
 }
 
 .image-feedback {

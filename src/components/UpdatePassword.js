@@ -158,7 +158,8 @@ class UpdatePassword extends Component {
 
   render() {
     return (
-      <div>
+      <div className="form-container">
+        <div id="update-password-form">
         <h2 className="form-header">Update Password</h2>
         <form onSubmit={this.handleSubmit}>
           <Grid
@@ -222,6 +223,7 @@ class UpdatePassword extends Component {
         </form>
         <div>{this.state.loading && <CircularProgress />}</div>
         {this.renderResult(this.state.submitMessage)}
+        </div>
       </div>
     );
   }

@@ -10,7 +10,7 @@ import axios from "axios";
 
 import { notBlank, validEmail } from "../helpers/Validation";
 
-class CreateAccountForm extends Component {
+class CreateAccount extends Component {
   constructor(props) {
     super(props);
 
@@ -111,7 +111,8 @@ class CreateAccountForm extends Component {
 
   render() {
     return (
-      <div className="form" id="create-account-form">
+      <div className="form-container">
+        <div id="create-account-form">
         <h2 className="form-header">Create an Account</h2>
         <form onSubmit={this.handleSubmit}>
           <Grid
@@ -187,9 +188,10 @@ class CreateAccountForm extends Component {
         </form>
         <div>{this.state.loading && <CircularProgress />}</div>
         {this.renderResult(this.state.submitMessage)}
+        </div>
       </div>
     );
   }
 }
 
-export default CreateAccountForm;
+export default CreateAccount;

@@ -134,7 +134,8 @@ class Account extends Component {
 
   render() {
     return (
-      <div>
+      <div className="form-container">
+      <div id="account-form">
         <h2 className="form-header">Account</h2>
         <form onSubmit={this.handleSubmit}>
           <Grid
@@ -229,6 +230,7 @@ class Account extends Component {
         </form>
         <div>{this.state.loading && <CircularProgress />}</div>
         {this.renderResult(this.state.submitMessage)}
+      </div>
       </div>
     );
   }

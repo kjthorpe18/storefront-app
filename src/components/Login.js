@@ -11,7 +11,7 @@ import axios from "axios";
 
 import { notBlank, validEmail } from "../helpers/Validation";
 
-class LoginForm extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -112,7 +112,8 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div className="form" id="login-form">
+      <div className="form-container">
+      <div id="login-form">
         <h2 className="form-header">Login</h2>
         <form onSubmit={this.handleSubmit}>
           <Grid
@@ -129,7 +130,7 @@ class LoginForm extends Component {
                 variant="outlined"
                 error={this.state.invalidEmail}
                 helperText={this.state.invalidEmail ? "Invalid email" : null}
-                style={{ width: "200px", margin: "5px" }}
+                style={{ width: "300px", margin: "5px" }}
                 type="text"
                 value={this.state.email}
                 onChange={this.handleInputChange}
@@ -141,7 +142,7 @@ class LoginForm extends Component {
                 name="password"
                 label="Password"
                 variant="outlined"
-                style={{ width: "200px", margin: "5px" }}
+                style={{ width: "300px", margin: "5px" }}
                 type="password"
                 value={this.state.password}
                 onChange={this.handleInputChange}
@@ -181,8 +182,9 @@ class LoginForm extends Component {
           </Link>
         </div>
       </div>
+      </div>
     );
   }
 }
 
-export default LoginForm;
+export default Login;
