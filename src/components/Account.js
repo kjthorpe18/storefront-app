@@ -135,102 +135,102 @@ class Account extends Component {
   render() {
     return (
       <div className="form-container">
-      <div id="account-form">
-        <h2 className="form-header">Account</h2>
-        <form onSubmit={this.handleSubmit}>
-          <Grid
-            container
-            alignItems="flex-start"
-            justifyContent="space-between"
-            direction="column"
-          >
-            <Grid item>
-              <TextField
-                id="email-input"
-                name="email"
-                label="Email"
-                variant="outlined"
-                error={this.state.invalidEmail ? true : false}
-                helperText={this.state.invalidEmail ? "Invalid email" : null}
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="password-input"
-                name="password"
-                label="Password"
-                variant="outlined"
-                disabled
-                InputProps={{ readOnly: true }}
-                InputLabelProps={{ shrink: true }}
-                style={{ width: "300px", margin: "5px" }}
-                type="password"
-                value={"**********"}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <Link to="/update-password" style={{ textDecoration: "none" }}>
-                <Button
-                  id="update-password-button"
-                  className="update-password-button"
+        <div id="account-form">
+          <h2 className="form-header">Account</h2>
+          <form onSubmit={this.handleSubmit}>
+            <Grid
+              container
+              alignItems="flex-start"
+              justifyContent="space-between"
+              direction="column"
+            >
+              <Grid item>
+                <TextField
+                  id="email-input"
+                  name="email"
+                  label="Email"
                   variant="outlined"
+                  error={this.state.invalidEmail ? true : false}
+                  helperText={this.state.invalidEmail ? "Invalid email" : null}
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="password-input"
+                  name="password"
+                  label="Password"
+                  variant="outlined"
+                  disabled
+                  InputProps={{ readOnly: true }}
+                  InputLabelProps={{ shrink: true }}
+                  style={{ width: "300px", margin: "5px" }}
+                  type="password"
+                  value={"**********"}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <Link to="/update-password" style={{ textDecoration: "none" }}>
+                  <Button
+                    id="update-password-button"
+                    className="update-password-button"
+                    variant="outlined"
+                    disabled={this.state.invalidEmail ? true : false}
+                    style={{ margin: "5px" }}
+                    label="Update Password"
+                    type="submit"
+                  >
+                    Update Password
+                  </Button>
+                </Link>
+              </Grid>
+              <br />
+              <Grid item>
+                <TextField
+                  id="first-input"
+                  name="first"
+                  label="First Name"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.first}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="last-input"
+                  name="last"
+                  label="Last Name"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.last}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  id="submit-button"
+                  className="submit-button"
+                  variant="contained"
                   disabled={this.state.invalidEmail ? true : false}
                   style={{ margin: "5px" }}
-                  label="Update Password"
+                  label="Submit"
                   type="submit"
                 >
-                  Update Password
+                  Submit
                 </Button>
-              </Link>
+              </Grid>
             </Grid>
-            <br />
-            <Grid item>
-              <TextField
-                id="first-input"
-                name="first"
-                label="First Name"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.first}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="last-input"
-                name="last"
-                label="Last Name"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.last}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <Button
-                id="submit-button"
-                className="submit-button"
-                variant="contained"
-                disabled={this.state.invalidEmail ? true : false}
-                style={{ margin: "5px" }}
-                label="Submit"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-        <div>{this.state.loading && <CircularProgress />}</div>
-        {this.renderResult(this.state.submitMessage)}
-      </div>
+          </form>
+          <div>{this.state.loading && <CircularProgress />}</div>
+          {this.renderResult(this.state.submitMessage)}
+        </div>
       </div>
     );
   }

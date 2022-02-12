@@ -39,7 +39,7 @@ body {
 .content {
   flex: 1 0 auto;
   flex-shrink: 0;
-  margin: 1em;
+  margin: 2em;
 }
 
 #navbar {
@@ -142,7 +142,7 @@ body {
 }
 
 .form-container {
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -155,4 +155,12 @@ body {
 .create-account-button {
   margin: 5px;
   margin-top: 15px;
+}
+
+.product-card {
+  height: inherit;
+}
+
+.product-card-link {
+  height: inherit;
 }

@@ -160,69 +160,69 @@ class UpdatePassword extends Component {
     return (
       <div className="form-container">
         <div id="update-password-form">
-        <h2 className="form-header">Update Password</h2>
-        <form onSubmit={this.handleSubmit}>
-          <Grid
-            container
-            alignItems="flex-start"
-            justifyContent="space-between"
-            direction="column"
-          >
-            <Grid item>
-              <TextField
-                id="current-password-input"
-                name="confirmOldPassword"
-                label="Current Password"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="password"
-                value={this.state.confirmOldPassword}
-                onChange={this.handleInputChange}
-              />
+          <h2 className="form-header">Update Password</h2>
+          <form onSubmit={this.handleSubmit}>
+            <Grid
+              container
+              alignItems="flex-start"
+              justifyContent="space-between"
+              direction="column"
+            >
+              <Grid item>
+                <TextField
+                  id="current-password-input"
+                  name="confirmOldPassword"
+                  label="Current Password"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="password"
+                  value={this.state.confirmOldPassword}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="new-password-input"
+                  name="newPassword"
+                  label="New Password"
+                  variant="outlined"
+                  error={this.state.newPasswordsMatch ? false : true}
+                  style={{ width: "300px", margin: "5px" }}
+                  type="password"
+                  value={this.state.newPassword}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="confirm-new-password-input"
+                  name="confirmNewPassword"
+                  label="Confirm New Password"
+                  variant="outlined"
+                  error={this.state.newPasswordsMatch ? false : true}
+                  style={{ width: "300px", margin: "5px" }}
+                  type="password"
+                  value={this.state.confirmNewPassword}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  id="update-button"
+                  className="update-button"
+                  variant="contained"
+                  disabled={this.state.newPasswordsMatch ? false : true}
+                  style={{ margin: "5px" }}
+                  label="Update"
+                  type="submit"
+                >
+                  Update
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <TextField
-                id="new-password-input"
-                name="newPassword"
-                label="New Password"
-                variant="outlined"
-                error={this.state.newPasswordsMatch ? false : true}
-                style={{ width: "300px", margin: "5px" }}
-                type="password"
-                value={this.state.newPassword}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="confirm-new-password-input"
-                name="confirmNewPassword"
-                label="Confirm New Password"
-                variant="outlined"
-                error={this.state.newPasswordsMatch ? false : true}
-                style={{ width: "300px", margin: "5px" }}
-                type="password"
-                value={this.state.confirmNewPassword}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <Button
-                id="update-button"
-                className="update-button"
-                variant="contained"
-                disabled={this.state.newPasswordsMatch ? false : true}
-                style={{ margin: "5px" }}
-                label="Update"
-                type="submit"
-              >
-                Update
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-        <div>{this.state.loading && <CircularProgress />}</div>
-        {this.renderResult(this.state.submitMessage)}
+          </form>
+          <div>{this.state.loading && <CircularProgress />}</div>
+          {this.renderResult(this.state.submitMessage)}
         </div>
       </div>
     );

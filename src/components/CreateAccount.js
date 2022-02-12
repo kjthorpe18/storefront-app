@@ -113,81 +113,81 @@ class CreateAccount extends Component {
     return (
       <div className="form-container">
         <div id="create-account-form">
-        <h2 className="form-header">Create an Account</h2>
-        <form onSubmit={this.handleSubmit}>
-          <Grid
-            container
-            alignItems="flex-start"
-            justifyContent="space-between"
-            direction="column"
-          >
-            <Grid item>
-              <TextField
-                id="email-input"
-                name="email"
-                label="Email"
-                variant="outlined"
-                error={this.state.invalidEmail}
-                helperText={this.state.invalidEmail ? "Invalid email" : null}
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-              />
+          <h2 className="form-header">Create an Account</h2>
+          <form onSubmit={this.handleSubmit}>
+            <Grid
+              container
+              alignItems="flex-start"
+              justifyContent="space-between"
+              direction="column"
+            >
+              <Grid item>
+                <TextField
+                  id="email-input"
+                  name="email"
+                  label="Email"
+                  variant="outlined"
+                  error={this.state.invalidEmail}
+                  helperText={this.state.invalidEmail ? "Invalid email" : null}
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="password-input"
+                  name="password"
+                  label="Password"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="first-input"
+                  name="first"
+                  label="First Name"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.first}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="last-input"
+                  name="last"
+                  label="Last Name"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.last}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  id="submit-button"
+                  className="submit-button"
+                  variant="contained"
+                  disabled={this.state.invalidEmail}
+                  style={{ margin: "5px" }}
+                  label="Submit"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <TextField
-                id="password-input"
-                name="password"
-                label="Password"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="first-input"
-                name="first"
-                label="First Name"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.first}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="last-input"
-                name="last"
-                label="Last Name"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.last}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <Button
-                id="submit-button"
-                className="submit-button"
-                variant="contained"
-                disabled={this.state.invalidEmail}
-                style={{ margin: "5px" }}
-                label="Submit"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-        <div>{this.state.loading && <CircularProgress />}</div>
-        {this.renderResult(this.state.submitMessage)}
+          </form>
+          <div>{this.state.loading && <CircularProgress />}</div>
+          {this.renderResult(this.state.submitMessage)}
         </div>
       </div>
     );

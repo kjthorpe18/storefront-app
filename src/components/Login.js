@@ -113,75 +113,75 @@ class Login extends Component {
   render() {
     return (
       <div className="form-container">
-      <div id="login-form">
-        <h2 className="form-header">Login</h2>
-        <form onSubmit={this.handleSubmit}>
-          <Grid
-            container
-            alignItems="flex-start"
-            justifyContent="space-between"
-            direction="column"
-          >
-            <Grid item>
-              <TextField
-                id="email-input"
-                name="email"
-                label="Email"
-                variant="outlined"
-                error={this.state.invalidEmail}
-                helperText={this.state.invalidEmail ? "Invalid email" : null}
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-              />
+        <div id="login-form">
+          <h2 className="form-header">Login</h2>
+          <form onSubmit={this.handleSubmit}>
+            <Grid
+              container
+              alignItems="flex-start"
+              justifyContent="space-between"
+              direction="column"
+            >
+              <Grid item>
+                <TextField
+                  id="email-input"
+                  name="email"
+                  label="Email"
+                  variant="outlined"
+                  error={this.state.invalidEmail}
+                  helperText={this.state.invalidEmail ? "Invalid email" : null}
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="password-input"
+                  name="password"
+                  label="Password"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  id="submit-button"
+                  className="submit-button"
+                  variant="contained"
+                  style={{ margin: "5px" }}
+                  label="Submit"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <TextField
-                id="password-input"
-                name="password"
-                label="Password"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
+          </form>
+          <div>{this.state.loading && <CircularProgress />}</div>
+          {this.renderResult(this.state.submitMessage)}
+          <div className="create-account-option">
+            <h5 className="create-account-button">
+              No account? Create one below
+            </h5>
+            <Link to="/create-account" style={{ textDecoration: "none" }}>
               <Button
-                id="submit-button"
-                className="submit-button"
-                variant="contained"
+                id="create-account-button"
+                variant="outlined"
+                disabled={this.state.invalidEmail ? true : false}
                 style={{ margin: "5px" }}
-                label="Submit"
+                label="Create Account"
                 type="submit"
               >
-                Submit
+                Create Account
               </Button>
-            </Grid>
-          </Grid>
-        </form>
-        <div>{this.state.loading && <CircularProgress />}</div>
-        {this.renderResult(this.state.submitMessage)}
-        <div className="create-account-option">
-          <h5 className="create-account-button">
-            No account? Create one below
-          </h5>
-          <Link to="/create-account" style={{ textDecoration: "none" }}>
-            <Button
-              id="create-account-button"
-              variant="outlined"
-              disabled={this.state.invalidEmail ? true : false}
-              style={{ margin: "5px" }}
-              label="Create Account"
-              type="submit"
-            >
-              Create Account
-            </Button>
-          </Link>
+            </Link>
+          </div>
         </div>
-      </div>
       </div>
     );
   }
