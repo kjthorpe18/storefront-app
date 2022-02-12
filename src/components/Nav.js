@@ -112,7 +112,7 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav id="navbar" className="nav">
+      <nav id="navbar">
         <div id="logo" className="nav-item">
           <Link to="/home" style={{ textDecoration: "none" }}>
             <img
@@ -158,6 +158,7 @@ class Nav extends Component {
         </div>
 
         <Drawer
+          id="menu-drawer"
           anchor={"right"}
           open={this.state.right}
           onClose={() => this.toggleDrawer(false)}
