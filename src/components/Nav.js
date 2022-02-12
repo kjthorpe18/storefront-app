@@ -12,6 +12,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
 import AddIcon from "@mui/icons-material/Add";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 
@@ -43,6 +44,8 @@ class Nav extends Component {
         return <AddIcon />;
       case "Categories":
         return <CategoryIcon />;
+      case "Shop":
+        return <ShoppingCartIcon />;
       default:
         return <InfoIcon />;
     }
@@ -60,6 +63,8 @@ class Nav extends Component {
         return "/create-product";
       case "Categories":
         return "/categories";
+      case "Shop":
+        return "/shop";
       default:
         return "/";
     }
@@ -77,6 +82,7 @@ class Nav extends Component {
           {[
             "Home",
             "Create Account",
+            "Shop",
             "Categories",
             "Create Product",
             "About Us"
