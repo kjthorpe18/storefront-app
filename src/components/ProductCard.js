@@ -22,7 +22,7 @@ class Layout extends Component {
       >
         <Link
           to={`/shop/${this.props.data.productUUID}`}
-          state={{ name: this.props.data.name }}
+          state={this.props.data}
           className="product-card-link"
           style={{ textDecoration: "none" }}
         >

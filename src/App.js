@@ -9,6 +9,8 @@ import NoMatch from "./views/NoMatch";
 import Home from "./components/Home";
 import About from "./views/About";
 import CreateProduct from "./components/CreateProduct";
+import ProductPage from "./components/ProductPage";
+
 import Shop from "./views/Shop";
 import UpdatePassword from "./components/UpdatePassword";
 
@@ -21,6 +23,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="create-product" element={<CreateProduct />} />
         <Route path="shop" element={<Shop />} />
+        <Route path="shop/:productUUID" element={<ProductPage />} />
         <Route path="account" element={<Account />} />
         <Route path="update-password" element={<UpdatePassword />} />
         <Route path="create-account" element={<CreateAccount />} />
