@@ -30,7 +30,8 @@ body {
 }
 
 .nav {
-  position: sticky;
+  width: 100%;
+  position: fixed;
   top: 0;
   flex-shrink: 0;
   margin-bottom: 1em;
@@ -40,6 +41,7 @@ body {
   flex: 1 0 auto;
   flex-shrink: 0;
   margin: 2em;
+  margin-top: 4em;
 }
 
 #navbar {
@@ -63,6 +65,7 @@ body {
   flex-direction: row;
   justify-content: flex-end;
   height: inherit;
+  padding-right: 5px;
 }
 
 .navbar-flexbox-item {

@@ -112,7 +112,7 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav id="navbar" className="sticky-top">
+      <nav id="navbar" className="nav">
         <div id="logo" className="nav-item">
           <Link to="/home" style={{ textDecoration: "none" }}>
             <img
