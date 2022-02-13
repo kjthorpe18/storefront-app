@@ -221,6 +221,7 @@ body {
   margin-left: 20%;
   margin-right: 20%;
   background-color: rgb(134, 133, 133);
+  height: auto;
 }
 
 .product-image {
@@ -229,6 +230,7 @@ body {
 
 .product-details {
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .first-half {
@@ -243,4 +245,13 @@ body {
   text-align: right;
   justify-content: flex-end;
   flex-direction: column;
+}
+
+.submit-result {
+  bottom: 0;
+  margin: 5px;
+  clear: both;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 10px;
 }

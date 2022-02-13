@@ -9,7 +9,6 @@ import ListItemText from "@mui/material/ListItemText";
 import InfoIcon from "@mui/icons-material/Info";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
 import AddIcon from "@mui/icons-material/Add";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -36,8 +35,6 @@ class Nav extends Component {
     switch (type) {
       case "Home":
         return <HomeIcon />;
-      case "Create Account":
-        return <PersonAddIcon />;
       case "About Us":
         return <InfoIcon />;
       case "Create Product":
@@ -55,8 +52,6 @@ class Nav extends Component {
     switch (page) {
       case "Home":
         return "/";
-      case "Create Account":
-        return "/create-account";
       case "About Us":
         return "/about";
       case "Create Product":
@@ -79,24 +74,19 @@ class Nav extends Component {
         onKeyDown={() => this.toggleDrawer(false)}
       >
         <List>
-          {[
-            "Home",
-            "Create Account",
-            "Shop",
-            "Categories",
-            "Create Product",
-            "About Us"
-          ].map((key, index) => (
-            <ListItem
-              button
-              key={key}
-              component={Link}
-              to={this.linkFromPage(key)}
-            >
-              <ListItemIcon>{this.iconRender(key)}</ListItemIcon>
-              <ListItemText primary={key} />
-            </ListItem>
-          ))}
+          {["Home", "Shop", "Categories", "Create Product", "About Us"].map(
+            (key, index) => (
+              <ListItem
+                button
+                key={key}
+                component={Link}
+                to={this.linkFromPage(key)}
+              >
+                <ListItemIcon>{this.iconRender(key)}</ListItemIcon>
+                <ListItemText primary={key} />
+              </ListItem>
+            )
+          )}
           {userLoggedIn() && (
             <ListItem
               button
@@ -131,6 +121,16 @@ class Nav extends Component {
         </div>
 
         <div id="navbar-flexbox" className="nav-item">
+          {userLoggedIn() && (
+            <div id="cart" className="nav-item navbar-flexbox-item">
+              <Link to="/cart" style={{ textDecoration: "none" }}>
+                <Button id="user-button">
+                  <ShoppingCartIcon fontSize="medium" />
+                </Button>
+              </Link>
+            </div>
+          )}
+
           {userLoggedIn() ? (
             <div id="user" className="nav-item navbar-flexbox-item">
               <Link to="/account" style={{ textDecoration: "none" }}>
@@ -142,20 +142,11 @@ class Nav extends Component {
           ) : (
             <div id="user" className="nav-item navbar-flexbox-item">
               <Link to="/login" style={{ textDecoration: "none" }}>
-                <Button id="user-button">{"Sign In"}</Button>
+                <Button id="user-button">{"Log In / Register"}</Button>
               </Link>
             </div>
           )}
 
-          {!userLoggedIn() && (
-            <div id="create-account" className="nav-item navbar-flexbox-item">
-              <Link to="/create-account" style={{ textDecoration: "none" }}>
-                <Button id="user-button">
-                  <PersonAddIcon fontSize="medium" />
-                </Button>
-              </Link>
-            </div>
-          )}
           <div id="menu" className="nav-item navbar-flexbox-item">
             <Button id="menu-button" onClick={() => this.toggleDrawer(true)}>
               {"Menu"}

@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import About from "./views/About";
 import CreateProduct from "./components/CreateProduct";
 import ProductPage from "./components/ProductPage";
+import Cart from "./components/Cart";
 
 import Shop from "./views/Shop";
 import UpdatePassword from "./components/UpdatePassword";
@@ -24,6 +25,7 @@ function App() {
         <Route path="create-product" element={<CreateProduct />} />
         <Route path="shop" element={<Shop />} />
         <Route path="shop/:productUUID" element={<ProductPage />} />
+        <Route path="cart" element={<Cart />} />
         <Route path="account" element={<Account />} />
         <Route path="update-password" element={<UpdatePassword />} />
         <Route path="create-account" element={<CreateAccount />} />

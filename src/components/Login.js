@@ -114,7 +114,7 @@ class Login extends Component {
     return (
       <div className="form-container">
         <div id="login-form">
-          <h2 className="form-header">Login</h2>
+          <h2 className="form-header">Log In</h2>
           <form onSubmit={this.handleSubmit}>
             <Grid
               container
