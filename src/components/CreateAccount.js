@@ -72,13 +72,20 @@ class CreateAccount extends Component {
           email: this.state.email,
           password: this.state.password,
           first: this.state.first,
-          last: this.state.last
+          last: this.state.last,
+          isAdmin: false,
+          cart: []
         }
       )
       .then((response) => {
         this.setState({ loading: null });
         this.setState({ submitResult: response.status });
         this.setState({ submitMessage: "Account creation successful!" });
+
+        localStorage.setItem("user", this.state.email);
+        localStorage.setItem("isAdmin", false);
+        localStorage.setItem("first", this.state.first);
+        localStorage.setItem("last", this.state.last);
       })
       .catch((error) => {
         console.log(error);

@@ -9,7 +9,6 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("Use effect!");
     setLoading(true);
 
     axios
@@ -21,7 +20,7 @@ const Cart = () => {
         console.log(response);
         setLoading(false);
 
-        setCart(response.data.cart);
+        response.data.cart !== null ? setCart(response.data.cart) : setCart([]);
       })
       .catch((error) => {
         console.log(error);
