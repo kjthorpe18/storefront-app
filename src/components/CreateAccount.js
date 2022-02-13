@@ -82,7 +82,7 @@ class CreateAccount extends Component {
         this.setState({ submitResult: response.status });
         this.setState({ submitMessage: "Account creation successful!" });
 
-        localStorage.setItem("user", this.state.email);
+        localStorage.setItem("email", this.state.email);
         localStorage.setItem("isAdmin", false);
         localStorage.setItem("first", this.state.first);
         localStorage.setItem("last", this.state.last);

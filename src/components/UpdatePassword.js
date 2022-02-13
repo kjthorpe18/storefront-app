@@ -34,7 +34,7 @@ class UpdatePassword extends Component {
   }
 
   componentDidMount() {
-    let email = localStorage.getItem("user");
+    let email = localStorage.getItem("email");
 
     axios
       .get(

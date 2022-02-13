@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Cart = () => {
-  const [email] = useState(localStorage.getItem("user"));
+  const [email] = useState(localStorage.getItem("email"));
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
 

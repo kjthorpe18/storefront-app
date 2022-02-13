@@ -79,7 +79,10 @@ class Login extends Component {
         this.setState({ submitResult: response.status });
         this.setState({ submitMessage: "Log in successful!" });
 
-        localStorage.setItem("user", this.state.email);
+        localStorage.setItem("email", this.state.email);
+        localStorage.setItem("isAdmin", response.data.isAdmin);
+        localStorage.setItem("first", response.data.first);
+        localStorage.setItem("last", response.data.last);
       })
       .catch((error) => {
         console.log(error);

@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const ProductPage = () => {
   const location = useLocation();
-  const [email] = useState(localStorage.getItem("user"));
+  const [email] = useState(localStorage.getItem("email"));
   const [loading, setLoading] = useState(false);
   const [submitResult, setSubmitResult] = useState(null);
   const [submitMessage, setSubmitMessage] = useState("");

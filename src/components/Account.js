@@ -29,7 +29,7 @@ class Account extends Component {
   }
 
   componentDidMount() {
-    let email = localStorage.getItem("user");
+    let email = localStorage.getItem("email");
     this.setState({ loading: true });
 
     axios
