@@ -39,10 +39,10 @@ class AllProducts extends Component {
           container
           spacing={{ xs: 1, md: 1 }}
           align="center"
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          columns={{ xs: 4, sm: 6, md: 12 }}
         >
           {this.state.products.map((item, index) => (
-            <Grid item key={index} xs={2} sm={4} md={4}>
+            <Grid item key={index} xs={2} sm={2} md={3}>
               <ProductCard data={item} />
             </Grid>
           ))}

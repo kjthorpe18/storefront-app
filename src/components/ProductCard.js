@@ -11,9 +11,8 @@ class Layout extends Component {
       <Box
         className="product-box"
         sx={{
-          width: 300,
-          height: 320,
-          margin: 0,
+          width: 220,
+          height: 270,
           m: 1,
           "&:hover": {
             opacity: [0.8, 0.7, 0.6],
