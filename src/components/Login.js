@@ -73,7 +73,7 @@ const Login = () => {
         localStorage.setItem("first", response.data.first);
         localStorage.setItem("last", response.data.last);
 
-        navigate("/welcome", { replace: true });
+        navigate("/login-success", { replace: true });
       })
       .catch((error) => {
         console.log(error);
