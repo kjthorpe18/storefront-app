@@ -7,6 +7,7 @@ import CreateAccount from "./components/CreateAccount";
 import Login from "./components/Login";
 import NoMatch from "./views/NoMatch";
 import Home from "./components/Home";
+import LoggedInHome from "./components/LoggedInHome";
 import About from "./views/About";
 import OrderPlaced from "./views/OrderPlaced";
 import CreateProduct from "./components/CreateProduct";
@@ -19,6 +20,7 @@ import UpdatePassword from "./components/UpdatePassword";
 function App() {
   return (
     <Routes>
+      <Route exact path="/welcome" element={<LoggedInHome />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
