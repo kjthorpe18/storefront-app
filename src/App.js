@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import NoMatch from "./views/NoMatch";
 import Home from "./components/Home";
 import About from "./views/About";
+import OrderPlaced from "./views/OrderPlaced";
 import CreateProduct from "./components/CreateProduct";
 import ProductPage from "./components/ProductPage";
 import Cart from "./components/Cart";
@@ -30,6 +31,7 @@ function App() {
         <Route path="update-password" element={<UpdatePassword />} />
         <Route path="create-account" element={<CreateAccount />} />
         <Route path="login" element={<Login />} />
+        <Route path="order-success" element={<OrderPlaced />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>

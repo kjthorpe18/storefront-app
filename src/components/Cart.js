@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
+import CartList from "./CartList";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [email] = useState(localStorage.getItem("email"));
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [attemptingCheckout, setAttemptingCheckout] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -30,7 +35,7 @@ const Cart = () => {
   }, [email]);
 
   function handleCheckout() {
-    setLoading(true);
+    setAttemptingCheckout(true);
 
     axios
       .post(
@@ -42,12 +47,13 @@ const Cart = () => {
       )
       .then((response) => {
         console.log(response);
-        setLoading(false);
+
+        setAttemptingCheckout(false);
+        navigate("/order-success");
       })
       .catch((error) => {
         console.log(error);
-
-        setLoading(false);
+        setAttemptingCheckout(false);
       });
   }
 
@@ -57,11 +63,7 @@ const Cart = () => {
       <div>{loading && <CircularProgress />}</div>
       {!loading && (
         <div>
-          {cart.map((item, index) => (
-            <p key={index}>
-              {item.name} {item.brand} {item.price} {item.productUUID}
-            </p>
-          ))}
+          <CartList items={cart} />
           <Button
             id="checkout-button"
             className="checkout-button"
@@ -73,6 +75,7 @@ const Cart = () => {
           >
             Checkout
           </Button>
+          <div>{attemptingCheckout && <CircularProgress />}</div>
         </div>
       )}
     </div>
