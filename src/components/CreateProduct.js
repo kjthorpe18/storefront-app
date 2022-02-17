@@ -18,29 +18,30 @@ class CreateProduct extends Component {
       brand: "",
       price: "",
       category: "",
-      image: null,
-      previewImage: null,
+      description: "",
+      // imageFile: null,
+      // imagePreview: null,
       loading: null,
       submitResult: null,
       submitMessage: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFileChange = this.handleFileChange.bind(this);
+    // this.handleFileChange = this.handleFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleFileChange(e) {
-    console.log("new file uploaded");
+  // handleFileChange(e) {
+  //   console.log("new file uploaded");
 
-    let url = URL.createObjectURL(e.target.files[0]);
+  //   let url = URL.createObjectURL(e.target.files[0]);
 
-    console.log(url);
-    this.setState({
-      previewImage: url,
-      image: e.target.files[0]
-    });
-  }
+  //   console.log(url);
+  //   this.setState({
+  //     imagePreview: url,
+  //     imageFile: e.target.files[0]
+  //   });
+  // }
 
   handleInputChange(e) {
     const target = e.target;
@@ -57,7 +58,7 @@ class CreateProduct extends Component {
 
     let blank_input = false;
 
-    ["name", "brand", "price", "category"].forEach((item) => {
+    ["name", "brand", "price", "category", "description"].forEach((item) => {
       if (!notBlank(this.state[item])) {
         blank_input = true;
       }
@@ -71,6 +72,21 @@ class CreateProduct extends Component {
 
     this.setState({ loading: "true" });
 
+    const date = new Date().toISOString();
+
+    // const formData = new FormData();
+    // formData.append("file", this.state.imageFile);
+    // formData.append("name", this.state.name);
+    // formData.append("brand", this.state.brand);
+    // formData.append("price", this.state.price);
+    // formData.append("category", this.state.category);
+    // formData.append("description", this.state.description);
+    // formData.append("dateAdded", date);
+
+    // for (var key of formData.entries()) {
+    //   console.log(key[0] + ", " + key[1]);
+    // }
+
     axios
       .post(
         "https://fvvd85s1e4.execute-api.us-east-2.amazonaws.com/test/products",
@@ -79,7 +95,8 @@ class CreateProduct extends Component {
           brand: this.state.brand,
           price: this.state.price,
           category: this.state.category,
-          image: this.state.image
+          description: this.state.description,
+          dateAdded: date
         }
       )
       .then((response) => {
@@ -88,6 +105,14 @@ class CreateProduct extends Component {
         this.setState({ loading: null });
         this.setState({ submitResult: response.status });
         this.setState({ submitMessage: "Product creation successful!" });
+
+        this.setState({
+          name: "",
+          brand: "",
+          price: "",
+          category: "",
+          description: ""
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -121,94 +146,108 @@ class CreateProduct extends Component {
   render() {
     return (
       <div className="form-container">
-      <div id="create-product-form">
-        <h2 className="form-header">Create a Product</h2>
-        <form onSubmit={this.handleSubmit}>
-          <Grid
-            container
-            alignItems="flex-start"
-            justifyContent="space-between"
-            direction="column"
-          >
-            <Grid item>
-              <TextField
-                id="name-input"
-                name="name"
-                label="Name"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.name}
-                onChange={this.handleInputChange}
-              />
+        <div id="create-product-form">
+          <h2 className="form-header">Create a Product</h2>
+          <form onSubmit={this.handleSubmit}>
+            <Grid
+              container
+              alignItems="flex-start"
+              justifyContent="space-between"
+              direction="column"
+            >
+              <Grid item>
+                <TextField
+                  id="name-input"
+                  name="name"
+                  label="Name"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.name}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="brand-input"
+                  name="brand"
+                  label="Brand"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.brand}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="price-input"
+                  name="price"
+                  label="Price"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.price}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="category-input"
+                  name="category"
+                  label="Category"
+                  variant="outlined"
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.category}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="description-input"
+                  name="description"
+                  label="Description"
+                  variant="outlined"
+                  multiline={true}
+                  style={{ width: "300px", margin: "5px" }}
+                  type="text"
+                  value={this.state.description}
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+              {/* <Grid item>
+                <Button
+                  variant="outlined"
+                  component="label"
+                  fontSize="small"
+                  style={{ fontSize: "12px", margin: "5px" }}
+                >
+                  Upload Product Image
+                  <input type="file" onChange={this.handleFileChange} hidden />
+                </Button>
+                <p className="image-feedback">
+                  {this.state.imageFile !== null &&
+                    "File: " + this.state.imageFile.name}
+                </p>
+              </Grid> */}
+              <Grid item>
+                <Button
+                  id="submit-button"
+                  className="submit-button"
+                  variant="contained"
+                  style={{ margin: "5px" }}
+                  label="Submit"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <TextField
-                id="brand-input"
-                name="brand"
-                label="Brand"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.brand}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="price-input"
-                name="price"
-                label="Price"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.price}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="category-input"
-                name="category"
-                label="Category"
-                variant="outlined"
-                style={{ width: "300px", margin: "5px" }}
-                type="text"
-                value={this.state.category}
-                onChange={this.handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <Button
-                variant="outlined"
-                component="label"
-                fontSize="small"
-                style={{ fontSize: "12px", margin: "5px" }}
-              >
-                Upload Product Image
-                <input type="file" onChange={this.handleFileChange} hidden />
-              </Button>
-              <p className="image-feedback">
-                {this.state.image !== null && "File: " + this.state.image.name}
-              </p>
-            </Grid>
-            <Grid item>
-              <Button
-                id="submit-button"
-                className="submit-button"
-                variant="contained"
-                style={{ margin: "5px" }}
-                label="Submit"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-        <div>{this.state.loading && <CircularProgress />}</div>
-        {this.renderResult(this.state.submitMessage)}
-      </div>
+          </form>
+          <div>{this.state.loading && <CircularProgress />}</div>
+          {this.renderResult(this.state.submitMessage)}
+        </div>
       </div>
     );
   }
