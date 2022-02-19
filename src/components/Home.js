@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import Grid from "@mui/material/Grid";
 
 const Home = () => {
+  // const [allItems, setAllItems] = useState([]);
   const [randomItems, setRandomItems] = useState([]);
   const [recentItems, setRecentItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,8 +18,14 @@ const Home = () => {
       .then((response) => {
         setLoading(false);
 
-        getRandomItems(response.data);
-        getRecentItems(response.data);
+        let sorted = response.data.sort(function (a, b) {
+          return new Date(b.dateAdded) - new Date(a.dateAdded);
+        });
+
+        // setAllItems(sorted)
+
+        getAndSetRandomItems(sorted);
+        getAndSetRecentItems(sorted);
       })
       .catch((error) => {
         setLoading(false);
@@ -26,43 +33,13 @@ const Home = () => {
       });
   }, []);
 
-  function getRecentItems(items) {
-    // Get 5 most recent items. Should be done by query, but whatever
-    let recents = [];
-    recents.push(items[0]);
-    let count = 1;
-
-    items.map((item, index) => {
-      if (count < 5) {
-        recents.push(item);
-        count++;
-      } else {
-        // find oldest item in recents
-        let oldest = recents[0];
-        let date = oldest.date;
-        let i = 0;
-
-        for (let x = 1; x < recents.length; x++) {
-          if (date > recents[x]) {
-            oldest = recents[x];
-            date = oldest.date;
-            i = x;
-          }
-        }
-
-        // Replace it if item is newer
-        if (item.dateAdded > oldest.dateAdded) {
-          recents[i] = item;
-        }
-      }
-
-      return recents;
-    });
+  function getAndSetRecentItems(items) {
+    let recents = items.slice(0, 5);
 
     setRecentItems(recents);
   }
 
-  function getRandomItems(items) {
+  function getAndSetRandomItems(items) {
     let randoms = [];
 
     for (let x = 0; x < 5; x++) {
