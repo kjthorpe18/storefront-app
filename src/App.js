@@ -13,6 +13,7 @@ import OrderPlaced from "./views/OrderPlaced";
 import CreateProduct from "./components/CreateProduct";
 import ProductPage from "./components/ProductPage";
 import Cart from "./components/Cart";
+import Categories from "./components/Categories";
 
 import Shop from "./views/Shop";
 import UpdatePassword from "./components/UpdatePassword";
@@ -25,6 +26,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="categories" element={<Categories />} />
         <Route path="create-product" element={<CreateProduct />} />
         <Route path="shop" element={<Shop />} />
         <Route path="shop/:productUUID" element={<ProductPage />} />
