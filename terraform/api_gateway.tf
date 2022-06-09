@@ -39,10 +39,24 @@ resource "aws_api_gateway_resource" "add_resource" {
   rest_api_id = local.rest_api_id
 }
 
+resource "aws_api_gateway_method" "put_add_cart_method" {
+  authorization = "NONE"
+  http_method   = "PUT"
+  resource_id   = aws_api_gateway_resource.add_resource.id
+  rest_api_id   = local.rest_api_id
+}
+
 resource "aws_api_gateway_resource" "checkout_resource" {
   parent_id   = aws_api_gateway_resource.cart_resource.id
   path_part   = "checkout"
   rest_api_id = local.rest_api_id
+}
+
+resource "aws_api_gateway_method" "post_checkout_cart_method" {
+  authorization = "NONE"
+  http_method   = "POST"
+  resource_id   = aws_api_gateway_resource.checkout_resource.id
+  rest_api_id   = local.rest_api_id
 }
 
 resource "aws_api_gateway_method" "get_cart_method" {
@@ -82,14 +96,56 @@ resource "aws_api_gateway_resource" "products_resource" {
   rest_api_id = local.rest_api_id
 }
 
+resource "aws_api_gateway_method" "get_products_method" {
+  authorization = "NONE"
+  http_method   = "GET"
+  resource_id   = aws_api_gateway_resource.products_resource.id
+  rest_api_id   = local.rest_api_id
+}
+
+resource "aws_api_gateway_method" "post_products_method" {
+  authorization = "NONE"
+  http_method   = "POST"
+  resource_id   = aws_api_gateway_resource.products_resource.id
+  rest_api_id   = local.rest_api_id
+}
+
 resource "aws_api_gateway_resource" "users_resource" {
   parent_id   = aws_api_gateway_rest_api.storefront_rest_api.root_resource_id
   path_part   = "users"
   rest_api_id = local.rest_api_id
 }
 
+resource "aws_api_gateway_method" "get_users_method" {
+  authorization = "NONE"
+  http_method   = "GET"
+  resource_id   = aws_api_gateway_resource.users_resource.id
+  rest_api_id   = local.rest_api_id
+}
+
+resource "aws_api_gateway_method" "post_users_method" {
+  authorization = "NONE"
+  http_method   = "POST"
+  resource_id   = aws_api_gateway_resource.users_resource.id
+  rest_api_id   = local.rest_api_id
+}
+
+resource "aws_api_gateway_method" "put_users_method" {
+  authorization = "NONE"
+  http_method   = "PUT"
+  resource_id   = aws_api_gateway_resource.users_resource.id
+  rest_api_id   = local.rest_api_id
+}
+
 resource "aws_api_gateway_resource" "login_resource" {
   parent_id   = aws_api_gateway_resource.users_resource.id
   path_part   = "login"
   rest_api_id = local.rest_api_id
+}
+
+resource "aws_api_gateway_method" "post_login_users_method" {
+  authorization = "NONE"
+  http_method   = "POST"
+  resource_id   = aws_api_gateway_resource.login_resource.id
+  rest_api_id   = local.rest_api_id
 }
