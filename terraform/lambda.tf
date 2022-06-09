@@ -17,8 +17,8 @@ data "aws_iam_policy_document" "lambda_dynamodb_permissions" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "get-user-role"
- assume_role_policy = jsonencode({
+  name = "lambda-service-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -61,7 +61,7 @@ resource "aws_lambda_function" "get_all_products_go_lambda" {
   description   = "Gets all products by scanning the Products table"
   role          = aws_iam_role.lambda_role.arn
   handler       = "lambda_function.get-all-products"
-  runtime       = "Go 1.x"
+  runtime       = "go1.x"
 }
 
 resource "aws_lambda_function" "checkout_cart_lambda" {
