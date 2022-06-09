@@ -121,6 +121,9 @@ resource "aws_api_gateway_method" "get_users_method" {
   http_method   = "GET"
   resource_id   = aws_api_gateway_resource.users_resource.id
   rest_api_id   = local.rest_api_id
+  request_parameters = {
+    "method.request.querystring.email" = true
+  }
 }
 
 resource "aws_api_gateway_method" "post_users_method" {
