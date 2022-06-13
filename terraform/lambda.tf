@@ -1,23 +1,10 @@
-data "aws_iam_policy_document" "lambda_dynamodb_permissions" {
-  statement {
-    sid    = "ReadWriteUsersTable"
-    effect = "Allow"
-
-    actions = [
-      "dynamodb:BatchGetItem",
-      "dynamodb:GetItem",
-      "dynamodb:Query",
-      "dynamodb:Scan",
-      "dynamodb:BatchWriteItem",
-      "dynamodb:PutItem",
-      "dynamodb:UpdateItem"
-    ]
-    resources = ["arn:aws:dynamodb:*:*:table/users"]
-  }
-}
-
 resource "aws_iam_role" "lambda_role" {
   name = "lambda-service-role"
+  managed_policy_arns = [
+    "arn:aws:iam::294380459317:policy/dynamo-access-policy",
+    "arn:aws:iam::294380459317:policy/ses-send-email"
+  ]
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -31,13 +18,6 @@ resource "aws_iam_role" "lambda_role" {
       },
     ]
   })
-}
-
-resource "aws_iam_role_policy" "lambda_policy" {
-  name = "read_write_users_table_policy"
-  role = aws_iam_role.lambda_role.id
-
-  policy = data.aws_iam_policy_document.lambda_dynamodb_permissions.json
 }
 
 resource "aws_lambda_function" "get_user_lambda" {
@@ -60,7 +40,7 @@ resource "aws_lambda_function" "get_all_products_go_lambda" {
   function_name = "get_all_products_go"
   description   = "Gets all products by scanning the Products table"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "lambda_function.get-all-products"
+  handler       = "main"
   runtime       = "go1.x"
 }
 
